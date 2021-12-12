@@ -24,32 +24,49 @@ namespace VP_Project
 
         private void button1_MouseHover(object sender, EventArgs e)
         {
-            button1.BackColor = Color.Gray;
+            button1.BackColor = Color.Black;
+            button1.Text = "Start";
+            button1.ForeColor = Color.Silver;
+
         }
 
         private void button2_MouseHover(object sender, EventArgs e)
         {
-            button2.BackColor = Color.Gray;
+            button2.BackColor = Color.Black;
+            button2.Text = "Start";
+            button2.ForeColor = Color.Silver;
+
         }
 
         private void button3_MouseHover(object sender, EventArgs e)
         {
-            button3.BackColor = Color.Gray;
+            button3.BackColor = Color.Black;
+            button3.Text = "Start";
+            button3.ForeColor = Color.Silver;
         }
 
         private void button1_MouseLeave(object sender, EventArgs e)
         {
             button1.BackColor = Color.Silver;
+            button1.Text = "Endless Mode";
+            button1.ForeColor = Color.Black;
+
         }
 
         private void button2_MouseLeave(object sender, EventArgs e)
         {
             button2.BackColor = Color.Silver;
+            button2.Text = "Story Mode";
+            button2.ForeColor = Color.Black;
+
         }
 
         private void button3_MouseLeave(object sender, EventArgs e)
         {
             button3.BackColor = Color.Silver;
+            button3.Text = "PvP Mode";
+            button3.ForeColor = Color.Black;
+
         }
     }
 }
