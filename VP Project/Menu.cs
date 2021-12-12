@@ -36,5 +36,20 @@ namespace VP_Project
         {
             button3.BackColor = Color.Gray;
         }
+
+        private void button1_MouseLeave(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.Silver;
+        }
+
+        private void button2_MouseLeave(object sender, EventArgs e)
+        {
+            button2.BackColor = Color.Silver;
+        }
+
+        private void button3_MouseLeave(object sender, EventArgs e)
+        {
+            button3.BackColor = Color.Silver;
+        }
     }
 }

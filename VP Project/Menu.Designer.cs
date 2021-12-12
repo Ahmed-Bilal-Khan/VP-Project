@@ -61,7 +61,7 @@ namespace VP_Project
             this.button1.TabIndex = 1;
             this.button1.Text = "Endless Mode";
             this.button1.UseVisualStyleBackColor = false;
-            
+            this.button1.MouseLeave += new System.EventHandler(this.button1_MouseLeave);
             this.button1.MouseHover += new System.EventHandler(this.button1_MouseHover);
             // 
             // button2
@@ -77,7 +77,7 @@ namespace VP_Project
             this.button2.TabIndex = 2;
             this.button2.Text = "Story Mode";
             this.button2.UseVisualStyleBackColor = false;
-            
+            this.button2.MouseLeave += new System.EventHandler(this.button2_MouseLeave);
             this.button2.MouseHover += new System.EventHandler(this.button2_MouseHover);
             // 
             // button3
@@ -93,7 +93,7 @@ namespace VP_Project
             this.button3.TabIndex = 3;
             this.button3.Text = "PvP Mode";
             this.button3.UseVisualStyleBackColor = false;
-            
+            this.button3.MouseLeave += new System.EventHandler(this.button3_MouseLeave);
             this.button3.MouseHover += new System.EventHandler(this.button3_MouseHover);
             // 
             // Menu
