@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace VP_Project.Model.Player
@@ -13,6 +13,7 @@ namespace VP_Project.Model.Player
             base.spawnX = spawnX;
             base.spawnY = spawnY;
             SetPlayerSprite();
+            bullets = new List<Bullet.Bullet>();
         }
 
         protected override void SetPlayerSprite()
@@ -32,6 +33,7 @@ namespace VP_Project.Model.Player
                 type: Bullet.BULLET_TYPE.RED,
                 spawnX: playerSprite.Location.X+10,
                 spawnY: playerSprite.Location.Y);
+            bullets.Add(bullet);
         }
     }
 }

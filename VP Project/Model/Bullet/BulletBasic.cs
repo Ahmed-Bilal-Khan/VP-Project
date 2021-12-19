@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-
+using System;
 namespace VP_Project.Model.Bullet
 {
     internal class BulletBasic : Bullet
@@ -12,7 +12,7 @@ namespace VP_Project.Model.Bullet
             this.type = type;
             this.spawnX = spawnX;
             this.spawnY = spawnY;
-
+            SPEED = 37;
             CreateBullet();
         }
 
@@ -42,6 +42,33 @@ namespace VP_Project.Model.Bullet
             bulletSprite.Show();
             bulletSprite.Name = "BulletSimple";
             bulletSprite.BackColor = System.Drawing.Color.Transparent;
+        }
+
+        public override void MoveBullet()
+        {
+            bulletSprite.Location = new System.Drawing.Point(bulletSprite.Location.X, bulletSprite.Location.Y - 37);
+        }
+
+        public override void CheckCollision()
+        {
+            foreach(Control control in parent.Controls)
+            {
+                if (control.Name == "BoundaryTop")
+                {
+                    if (bulletSprite.Bounds.IntersectsWith(control.Bounds))
+                    {
+                        bulletSprite.Dispose();
+                        bulletSprite = null;
+                        GC.Collect();
+                    }
+                }
+            }
+            
+        }
+
+        public override bool IsWasted()
+        {
+            return (bulletSprite == null);
         }
     }
 }

@@ -4,12 +4,12 @@ using System.Windows.Forms;
 namespace VP_Project.Model
 {
     enum GAME_TYPE { ENDLESS, STORY, PVP};
-    
     internal class Game
     {
         Player.Player player;
         GAME_TYPE type;
         Control parent;
+        Panel topBoundary;
 
         // Input Checks
         Boolean rightPressed;
@@ -25,8 +25,19 @@ namespace VP_Project.Model
             switch(type)
             {
                 case GAME_TYPE.ENDLESS:
-                    player = new Player.Player_Yellow(this.parent, 400, 500);
+                    player = new Player.Played_Blue(this.parent, 400, 500);
                     break;
+            }
+
+            foreach (Control c in parent.Controls)
+            {
+                if (c is Panel)
+                {
+                    if(c.Name == "BoundaryTop")
+                    {
+                        topBoundary = (Panel)c;
+                    }
+                }
             }
         }
 
@@ -61,30 +72,46 @@ namespace VP_Project.Model
             }
         }
 
+
+
         public void MoveBullet()
         {
-            foreach (Control c in parent.Controls)
+            for(int i = 0; i < player.Bullets.Count; i++)
             {
-                if (c is PictureBox)
+                if(!player.Bullets[i].IsWasted())
                 {
-                    PictureBox bulletBox = (PictureBox)c;
-                    if (c.Name == "BulletSimple")
-                    {
-                        bulletBox.Location = new System.Drawing.Point(bulletBox.Location.X, bulletBox.Location.Y - 32);
+                    player.Bullets[i].MoveBullet();
+                    player.Bullets[i].CheckCollision();
 
-                    }
-                    if (c.Name == "BulletMedium")
-                    {
-                        bulletBox.Location = new System.Drawing.Point(bulletBox.Location.X, bulletBox.Location.Y - 37);
-
-                    }
-                    if (bulletBox.Location.Y == 300)
-                    {
-                        bulletBox.Dispose();
-                        bulletBox = null;
-                    }
+                }
+                if(player.Bullets[i].IsWasted())
+                {
+                    player.Bullets.RemoveAt(i);
                 }
             }
+            //foreach (Control c in parent.Controls)
+            //{
+            //    if (c is PictureBox)
+            //    {
+            //        PictureBox bulletBox = (PictureBox)c;
+            //        if (c.Name == "BulletSimple")
+            //        {
+            //            bulletBox.Location = new System.Drawing.Point(bulletBox.Location.X, bulletBox.Location.Y - 32);
+
+            //        }
+            //        if (c.Name == "BulletMedium")
+            //        {
+            //            bulletBox.Location = new System.Drawing.Point(bulletBox.Location.X, bulletBox.Location.Y - 37);
+
+            //        }
+            //        if(c.Bounds.IntersectsWith(topBoundary.Bounds))
+            //        if (bulletBox.Location.Y == 600)
+            //        {
+            //            bulletBox = null;
+            //            bulletBox.Dispose();
+            //        }
+            //    }
+            //}
         }
     }
 }

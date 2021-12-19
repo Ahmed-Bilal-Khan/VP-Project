@@ -1,16 +1,19 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace VP_Project.Model.Player
 {
     internal abstract class Player
     {
-
+        protected List<Bullet.Bullet> bullets;
         protected PictureBox playerSprite;
         protected Control parent;
         protected int SPEED;
         protected double playerHealth;
         protected int spawnX;
         protected int spawnY;
+
+        public List<Bullet.Bullet> Bullets { get => bullets; set => bullets = value; }
 
         public abstract void Shoot();
         protected abstract void SetPlayerSprite();
@@ -28,8 +31,9 @@ namespace VP_Project.Model.Player
         }
         public void MoveRight()
         {
-            //MessageBox.Show("Right PRessed");
             this.playerSprite.Left += SPEED;
         }
+
+        
     }
 }

@@ -36,6 +36,7 @@ namespace VP_Project
             this.button3 = new System.Windows.Forms.Button();
             this.MenuHolder = new System.Windows.Forms.Panel();
             this.Update_ = new System.Windows.Forms.Timer(this.components);
+            this.BoundaryTop = new System.Windows.Forms.Panel();
             this.MenuHolder.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,6 +117,14 @@ namespace VP_Project
             this.Update_.Interval = 45;
             this.Update_.Tick += new System.EventHandler(this.Update_Tick);
             // 
+            // BoundaryTop
+            // 
+            this.BoundaryTop.BackColor = System.Drawing.Color.Transparent;
+            this.BoundaryTop.Location = new System.Drawing.Point(0, 0);
+            this.BoundaryTop.Name = "BoundaryTop";
+            this.BoundaryTop.Size = new System.Drawing.Size(787, 10);
+            this.BoundaryTop.TabIndex = 5;
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -124,6 +133,7 @@ namespace VP_Project
             this.BackgroundImage = global::VP_Project.Properties.Resources._1268183;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.ControlBox = false;
+            this.Controls.Add(this.BoundaryTop);
             this.Controls.Add(this.MenuHolder);
             this.MaximumSize = new System.Drawing.Size(800, 600);
             this.MinimumSize = new System.Drawing.Size(800, 600);
@@ -147,6 +157,7 @@ namespace VP_Project
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Panel MenuHolder;
         private System.Windows.Forms.Timer Update_;
+        private System.Windows.Forms.Panel BoundaryTop;
     }
 }
 

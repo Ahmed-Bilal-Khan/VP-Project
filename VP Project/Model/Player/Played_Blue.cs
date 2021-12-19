@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace VP_Project.Model.Player
@@ -13,6 +13,7 @@ namespace VP_Project.Model.Player
             base.spawnX = spawnX;
             base.spawnY = spawnY;
             SetPlayerSprite();
+            bullets = new List<Bullet.Bullet>();
         }
 
         public override void Shoot()
@@ -23,6 +24,7 @@ namespace VP_Project.Model.Player
                 playerSprite.Location.X+10,
                 playerSprite.Location.Y
                 );
+            bullets.Add(bullet);
         }
 
         protected override void SetPlayerSprite()

@@ -7,10 +7,13 @@ namespace VP_Project.Model.Bullet
     {
         protected PictureBox bulletSprite;
         protected Control parent;
-        protected double bulletDamage;
+
         protected int spawnX;
         protected int spawnY;
-
+        protected int SPEED;
         protected abstract void CreateBullet();
+        public abstract void MoveBullet();
+        public abstract void CheckCollision();
+        public abstract bool IsWasted();
     }
 }

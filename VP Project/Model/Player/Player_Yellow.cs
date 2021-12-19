@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace VP_Project.Model.Player
@@ -15,6 +13,7 @@ namespace VP_Project.Model.Player
             base.spawnX = spawnX;
             base.spawnY = spawnY;
             SetPlayerSprite();
+            bullets = new List<Bullet.Bullet>();
         }
         public override void Shoot()
         {
