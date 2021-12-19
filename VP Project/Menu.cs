@@ -194,6 +194,7 @@ namespace VP_Project
             MenuGameOver.Visible = false;
             MenuHolder.Visible = true;
             state = GAME_STATE.GAME_WAIT;
+            game.Dispose();
             game = null;
             GC.Collect();
         }

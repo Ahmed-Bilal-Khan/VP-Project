@@ -49,6 +49,7 @@ namespace VP_Project
             this.MenuGameOver = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.MenuHolder.SuspendLayout();
             this.MENU_ENDLESS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -241,6 +242,7 @@ namespace VP_Project
             // MenuGameOver
             // 
             this.MenuGameOver.BackColor = System.Drawing.Color.Transparent;
+            this.MenuGameOver.Controls.Add(this.textBox1);
             this.MenuGameOver.Controls.Add(this.button4);
             this.MenuGameOver.Controls.Add(this.label3);
             this.MenuGameOver.Location = new System.Drawing.Point(114, 29);
@@ -255,11 +257,11 @@ namespace VP_Project
             this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button4.Location = new System.Drawing.Point(127, 212);
+            this.button4.Location = new System.Drawing.Point(118, 285);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(314, 80);
             this.button4.TabIndex = 8;
-            this.button4.Text = "Retun to Menu";
+            this.button4.Text = "Return to Menu";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -274,6 +276,14 @@ namespace VP_Project
             this.label3.Size = new System.Drawing.Size(521, 91);
             this.label3.TabIndex = 0;
             this.label3.Text = "GAME OVER";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox1.Location = new System.Drawing.Point(93, 167);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(388, 40);
+            this.textBox1.TabIndex = 9;
             // 
             // Menu
             // 
@@ -329,6 +339,7 @@ namespace VP_Project
         private System.Windows.Forms.Panel MenuGameOver;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

@@ -4,7 +4,7 @@ using System;
 
 namespace VP_Project.Model.Player
 {
-    internal abstract class Player
+    internal abstract class Player : IDisposable
     {
         protected List<Bullet.Bullet> bullets;
         protected PictureBox playerSprite;
@@ -68,6 +68,12 @@ namespace VP_Project.Model.Player
         public void MoveRight()
         {
             this.playerSprite.Left += SPEED;
+        }
+
+        public void Dispose()
+        {
+            playerSprite.Dispose();
+
         }
     }
 }

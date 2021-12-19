@@ -15,5 +15,9 @@ namespace VP_Project.Model.Bullet
         public abstract void MoveBullet();
         public abstract void CheckCollision();
         public abstract bool IsWasted();
+
+        protected bool shotEnemy;
+
+        public bool ShotEnemy { get => shotEnemy; }
     }
 }

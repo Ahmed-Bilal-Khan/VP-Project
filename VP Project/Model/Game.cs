@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using System.Timers;
 using Timer = System.Windows.Forms.Timer;
 
-namespace VP_Project.Model.Game
+namespace VP_Project.Model.Game 
 {
     enum GAME_TYPE { ENDLESS, STORY, PVP};
-    internal class Game
+    internal class Game : IDisposable
     {
         Player.Player player;
         GAME_TYPE type;
@@ -19,7 +18,9 @@ namespace VP_Project.Model.Game
         static int appearDelay;
         static int timeSinceAppearance;
         static int setPlayerToNormal;
+        static int SCORE;
         PictureBox laserBox;
+        Label scoreLabel;
         // Input Checks
         Boolean rightPressed;
         Boolean leftPressed;
@@ -29,14 +30,25 @@ namespace VP_Project.Model.Game
         static Boolean pickupExists;
         static Boolean playerHasPickup;
         Random r = new Random();
+
         public Game(GAME_TYPE type, Control parent)
         {
             countdown = 0;
             appearTime = 0;
+            SCORE = 0;
             appearDelay = r.Next(8, 13);
             this.type = type;
             this.parent = parent;
-            switch(type)
+            scoreLabel = new Label();
+            scoreLabel.Text = ($"SCORE: {SCORE}");
+            scoreLabel.Parent = parent;
+            scoreLabel.Location = new System.Drawing.Point(4, 17);
+            scoreLabel.Size = new System.Drawing.Size(150, 24);
+            scoreLabel.ForeColor = System.Drawing.Color.Silver;
+            scoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16);
+            scoreLabel.Show();
+            scoreLabel.BackColor = System.Drawing.Color.Transparent;
+            switch (type)
             {
                 case GAME_TYPE.ENDLESS:
                     Create_Endless();
@@ -86,7 +98,13 @@ namespace VP_Project.Model.Game
                     player.Bullets[i].CheckCollision();
 
                 }
-                if(player.Bullets[i].IsWasted())
+                else if (player.Bullets[i].IsWasted() && player.Bullets[i].ShotEnemy)
+                {
+                    player.Bullets.RemoveAt(i);
+                    SCORE++;
+                    scoreLabel.Text = $"SCORE: {SCORE}";
+                }
+                else
                 {
                     player.Bullets.RemoveAt(i);
                 }
@@ -100,6 +118,7 @@ namespace VP_Project.Model.Game
                 if (enemies[i].IsWasted())
                 {
                     enemies.RemoveAt(i);
+                    
                 }
                 else
                 {
@@ -136,7 +155,7 @@ namespace VP_Project.Model.Game
                 enemies = new List<Player.Enemy>();
 
                 timer = new Timer();
-                timer.Interval = 1000;
+                timer.Interval = 2000;
                 timer.Tick += new EventHandler(SpawnEnemy);
                 timer.Enabled = true;
                 timer.Start();
@@ -162,33 +181,10 @@ namespace VP_Project.Model.Game
         {
             countdown++;
             appearTime++;
-            if(pickupExists)
-            {
-                timeSinceAppearance++;
-                if(player != null)
-                if (laserBox.Bounds.IntersectsWith(player.PlayerSprite.Bounds))
-                {
-                    player.ShootsLaser = true;
-                    playerHasPickup = true;
-                    setPlayerToNormal = 6;
-                }
-            }
-            if(playerHasPickup)
-            {
-                setPlayerToNormal++;
-                if (setPlayerToNormal % 5 == 0)
-                {
-                    player.ShootsLaser = false;
-                    setPlayerToNormal = 0;
-                }
-            }
+            
             if(player != null)
             {
-                int spawnY = 3;
-                int spawnX = r.Next(10, 790);
-                Player.Enemy enemy = new Player.Enemy(parent, (Player.ENEMY_TYPE)r.Next(0, 2), spawnX, spawnY);
-                enemies.Add(enemy);
-
+                AddEnemy();
                 player.CheckCollision();
                 if (player.IsWasted())
                 {
@@ -209,9 +205,49 @@ namespace VP_Project.Model.Game
                     laserBox.Dispose();
                     pickupExists = false;
                 }
+
+                if (countdown % 15 == 0)
+                {
+                    if (timer.Interval >= 500)
+                    {
+                        timer.Interval -= 300;
+                    }
+                    else
+                    {
+                        AddEnemy(); // spawn twice
+                    }
+
+                }
+                if (pickupExists)
+                {
+                    timeSinceAppearance++;
+                    if (player != null)
+                        if (laserBox.Bounds.IntersectsWith(player.PlayerSprite.Bounds))
+                        {
+                            player.ShootsLaser = true;
+                            playerHasPickup = true;
+                            setPlayerToNormal = 6;
+                            laserBox.Dispose();
+                        }
+                }
+                if (playerHasPickup)
+                {
+                    setPlayerToNormal++;
+                    if (setPlayerToNormal % 5 == 0)
+                    {
+                        player.ShootsLaser = false;
+                        setPlayerToNormal = 0;
+                    }
+                }
             }
         }
-
+        private void AddEnemy ()
+        {
+            int spawnY = 3;
+            int spawnX = r.Next(10, 790);
+            Player.Enemy enemy = new Player.Enemy(parent, (Player.ENEMY_TYPE)r.Next(0, 2), spawnX, spawnY);
+            enemies.Add(enemy);
+        }
         private void SpawnLaser()
         {
             int spawnX = r.Next(210, 650);
@@ -230,12 +266,21 @@ namespace VP_Project.Model.Game
 
         private void DestroyGame()
         {
+            player.DestroySelf();
             player = null;
             foreach(Player.Enemy enemy in enemies)
             {
                 enemy.DestroySelf();
             }
             GC.Collect();
+        }
+
+        public void Dispose()
+        {
+            scoreLabel.Dispose();
+            SCORE = 0;
+            timer.Dispose();
+            enemies.Clear();
         }
     }
 }

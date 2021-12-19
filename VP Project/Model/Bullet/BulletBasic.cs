@@ -80,6 +80,7 @@ namespace VP_Project.Model.Bullet
                     {
                         if (bulletSprite.Bounds.IntersectsWith(control.Bounds))
                         {
+                            shotEnemy = true;
                             if(tries > 1)
                             {
                                 tries--;
