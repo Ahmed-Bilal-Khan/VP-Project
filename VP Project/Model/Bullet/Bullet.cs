@@ -2,7 +2,7 @@
 
 namespace VP_Project.Model.Bullet
 {
-    enum BULLET_TYPE { RED, YELLOW, BLUE, GREEN };
+    enum BULLET_TYPE { RED, YELLOW, BLUE, GREEN, LASER };
     internal abstract class Bullet
     {
         protected PictureBox bulletSprite;

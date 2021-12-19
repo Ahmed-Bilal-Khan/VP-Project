@@ -17,9 +17,14 @@ namespace VP_Project.Model.Player
         }
         public override void Shoot()
         {
+            Bullet.BULLET_TYPE bulletType = Bullet.BULLET_TYPE.GREEN;
+            if (ShootsLaser)
+            {
+                bulletType = Bullet.BULLET_TYPE.LASER;
+            }
             Bullet.Bullet bullet = new Model.Bullet.BulletBasic(
                 parent: parent,
-                type: Bullet.BULLET_TYPE.GREEN,
+                type: bulletType,
                 spawnX: playerSprite.Location.X + 10,
                 spawnY: playerSprite.Location.Y);
             bullets.Add(bullet);

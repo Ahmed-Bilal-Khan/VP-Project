@@ -14,16 +14,26 @@ namespace VP_Project.Model.Game
         Control parent;
         public static Timer timer;
         List<Player.Enemy> enemies;
-
+        static int countdown;
+        static int appearTime;
+        static int appearDelay;
+        static int timeSinceAppearance;
+        static int setPlayerToNormal;
+        PictureBox laserBox;
         // Input Checks
         Boolean rightPressed;
         Boolean leftPressed;
         Boolean upPressed;
         Boolean downPressed;
         Boolean shootPressed;
-
+        static Boolean pickupExists;
+        static Boolean playerHasPickup;
+        Random r = new Random();
         public Game(GAME_TYPE type, Control parent)
         {
+            countdown = 0;
+            appearTime = 0;
+            appearDelay = r.Next(8, 13);
             this.type = type;
             this.parent = parent;
             switch(type)
@@ -91,11 +101,10 @@ namespace VP_Project.Model.Game
                 {
                     enemies.RemoveAt(i);
                 }
-                if (!enemies[i].IsWasted())
+                else
                 {
                     enemies[i].MoveBackward();
                     enemies[i].CheckCollision();
-
                 }
             }
         }
@@ -151,16 +160,32 @@ namespace VP_Project.Model.Game
         }
         private void SpawnEnemy(object sender, EventArgs e)
         {
+            countdown++;
+            appearTime++;
+            if(pickupExists)
+            {
+                timeSinceAppearance++;
+                if (laserBox.Bounds.IntersectsWith(player.PlayerSprite.Bounds))
+                {
+                    player.ShootsLaser = true;
+                    playerHasPickup = true;
+                    setPlayerToNormal = 6;
+                }
+            }
+            if(playerHasPickup)
+            {
+                setPlayerToNormal++;
+                if (setPlayerToNormal % 5 == 0)
+                {
+                    player.ShootsLaser = false;
+                    setPlayerToNormal = 0;
+                }
+            }
             if(player != null)
             {
-                Random rand = new Random();
-                Random rand2 = new Random();
-
-
                 int spawnY = 3;
-                int spawnX = rand.Next(10, 790);
-
-                Player.Enemy enemy = new Player.Enemy(parent, (Player.ENEMY_TYPE)rand2.Next(0, 2), spawnX, spawnY);
+                int spawnX = r.Next(10, 790);
+                Player.Enemy enemy = new Player.Enemy(parent, (Player.ENEMY_TYPE)r.Next(0, 2), spawnX, spawnY);
                 enemies.Add(enemy);
 
                 player.CheckCollision();
@@ -169,7 +194,37 @@ namespace VP_Project.Model.Game
                     Menu.state = GAME_STATE.GAME_END;
                     DestroyGame();
                 }
+
+                if(appearTime == appearDelay)
+                {
+                    SpawnLaser();
+                    appearDelay = r.Next(8, 13);
+                    appearTime = 0;
+                    timeSinceAppearance = 5;
+                    pickupExists = true;
+                }
+                if(timeSinceAppearance % 4 == 0 && pickupExists)
+                {
+                    laserBox.Dispose();
+                    pickupExists = false;
+                }
             }
+        }
+
+        private void SpawnLaser()
+        {
+            int spawnX = r.Next(210, 650);
+            int spawnY = r.Next(280, 530);
+
+            laserBox = new PictureBox();
+
+            laserBox.Location = new System.Drawing.Point(spawnX, spawnY);
+            laserBox.Parent = parent;
+            laserBox.Image = Properties.Resources.laser_pickup;
+            laserBox.Size = new System.Drawing.Size(17, 17);
+            laserBox.BackColor = System.Drawing.Color.Transparent;
+            laserBox.Show();
+            laserBox.Name = "Laser";
         }
 
         private void DestroyGame()

@@ -43,13 +43,14 @@ namespace VP_Project.Model.Player
         }
         public override void DestroySelf()
         {
+            //playerSprite.Location = new System.Drawing.Point(playerSprite.Location.X, 580);
             playerSprite.Dispose();
             playerSprite = null;
             GC.Collect();
         }
         public override bool IsWasted()
         {
-            return (playerSprite == null);
+            return (playerSprite == null || playerSprite.IsDisposed);
         }
 
         public override void Shoot()

@@ -5,7 +5,7 @@ namespace VP_Project.Model.Bullet
     internal class BulletBasic : Bullet
     {
         BULLET_TYPE type;
-
+        int tries;
         public BulletBasic(Control parent, BULLET_TYPE type, int spawnX, int spawnY)
         {
             this.parent = parent;
@@ -13,7 +13,14 @@ namespace VP_Project.Model.Bullet
             this.spawnX = spawnX;
             this.spawnY = spawnY;
             SPEED = 37;
-            
+            if(type == BULLET_TYPE.LASER)
+            {
+                tries = 2;
+            }
+            else
+            {
+                tries = 1;
+            }
             CreateBullet();
         }
 
@@ -35,6 +42,10 @@ namespace VP_Project.Model.Bullet
                 case BULLET_TYPE.BLUE:
                     bulletSprite.Image = Properties.Resources.bullet_blue;
                     break;
+                case BULLET_TYPE.LASER:
+                    bulletSprite.Image = Properties.Resources.laser;
+                    break;
+
             }
 
             bulletSprite.Size = new System.Drawing.Size(10, 20);
@@ -47,7 +58,7 @@ namespace VP_Project.Model.Bullet
 
         public override void MoveBullet()
         {
-            bulletSprite.Location = new System.Drawing.Point(bulletSprite.Location.X, bulletSprite.Location.Y - 37);
+            bulletSprite.Location = new System.Drawing.Point(bulletSprite.Location.X, bulletSprite.Location.Y - SPEED);
         }
 
         public override void CheckCollision()
@@ -69,8 +80,15 @@ namespace VP_Project.Model.Bullet
                     {
                         if (bulletSprite.Bounds.IntersectsWith(control.Bounds))
                         {
-                            bulletSprite.Dispose();
-                            bulletSprite = null;
+                            if(tries > 1)
+                            {
+                                tries--;
+                            }
+                            else
+                            {
+                                bulletSprite.Dispose();
+                                bulletSprite = null;
+                            }
                             control.Dispose();
                             GC.Collect();
                         }
