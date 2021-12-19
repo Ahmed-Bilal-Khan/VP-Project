@@ -7,7 +7,7 @@ namespace VP_Project.Model.Player
     {
         public Played_Green(Control parent, int spawnX, int spawnY)
         {
-            SPEED = 6;
+            SPEED = 15;
             playerHealth = 100;
             base.parent = parent;
             base.spawnX = spawnX;
@@ -22,6 +22,7 @@ namespace VP_Project.Model.Player
                 type: Bullet.BULLET_TYPE.GREEN,
                 spawnX: playerSprite.Location.X + 10,
                 spawnY: playerSprite.Location.Y);
+            bullets.Add(bullet);
         }
 
         protected override void SetPlayerSprite()
@@ -34,5 +35,7 @@ namespace VP_Project.Model.Player
             playerSprite.Location = new System.Drawing.Point(spawnX, spawnY);
             playerSprite.BackColor = System.Drawing.Color.Transparent;
         }
+
+
     }
 }

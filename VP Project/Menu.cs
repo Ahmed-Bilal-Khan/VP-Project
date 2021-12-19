@@ -2,49 +2,50 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
-using VP_Project.Model;
+using VP_Project.Model.Game;
 
 namespace VP_Project
 {
-    enum GAME_STATE { GAME_START, GAME_END, GAME_PAUSE };
+    public enum GAME_STATE { GAME_START, GAME_END, GAME_PAUSE, GAME_WAIT };
     public partial class Menu : Form
     {
         Game game;
-        GAME_STATE state;
-
-        Graphics graphics;
-
+        public static GAME_STATE state;
+        public static int count = 0;
         public Menu()
         {
             InitializeComponent();
-            state = GAME_STATE.GAME_PAUSE;
+            state = GAME_STATE.GAME_WAIT;
             this.DoubleBuffered = true;
             
         }
 
         private void InitGame()
         {
+            state = GAME_STATE.GAME_START;
             game = new Game(
                 type: GAME_TYPE.ENDLESS,
                 parent: this
                 );
-            state = GAME_STATE.GAME_START;
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             // TODO ... Well do something else here
-            InitGame();
-            MenuHolder.Hide();
-            this.Focus();
+            MENU_ENDLESS.Visible = true;
+            MenuHolder.Visible = false;
         }
 
         private void Update_Tick(object sender, EventArgs e)
         {
             if (state == GAME_STATE.GAME_START)
             {
-                game.CheckInput();
-                game.MoveBullet();
+                game.Update();
+            }
+            if(state == GAME_STATE.GAME_END)
+            {
+                MenuGameOver.Visible = true;
             }
                 
         }
@@ -149,6 +150,52 @@ namespace VP_Project
             button3.Text = "PvP Mode";
             button3.ForeColor = Color.Black;
 
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            count++;
+            if(count==4)
+            {
+                count = 0;
+            }
+            switch (count) {
+                case 0:
+                    PlaneSelectBox.BackgroundImage = Properties.Resources.plane_red;
+                    break;
+                case 1:
+                    PlaneSelectBox.BackgroundImage = Properties.Resources.plane_green;
+                    break;
+                case 2:
+                    PlaneSelectBox.BackgroundImage = Properties.Resources.plane_blue;
+                    break;
+                case 3:
+                    PlaneSelectBox.BackgroundImage = Properties.Resources.plane_yellow;
+                    break;
+            }
+        }
+
+        private void BtnBack_Click(object sender, EventArgs e)
+        {
+            MenuHolder.Visible = true;
+            MENU_ENDLESS.Visible = false;
+        }
+
+        private void BtnStart_Click(object sender, EventArgs e)
+        {
+            MENU_ENDLESS.Visible = false;
+            InitGame();
+            this.Focus();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            MENU_ENDLESS.Visible = false;
+            MenuGameOver.Visible = false;
+            MenuHolder.Visible = true;
+            state = GAME_STATE.GAME_WAIT;
+            game = null;
+            GC.Collect();
         }
     }
 

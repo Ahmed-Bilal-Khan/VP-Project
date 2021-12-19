@@ -22,6 +22,7 @@ namespace VP_Project.Model.Player
                 type: Bullet.BULLET_TYPE.YELLOW,
                 spawnX: playerSprite.Location.X + 10,
                 spawnY: playerSprite.Location.Y);
+            bullets.Add(bullet);
         }
 
         protected override void SetPlayerSprite()

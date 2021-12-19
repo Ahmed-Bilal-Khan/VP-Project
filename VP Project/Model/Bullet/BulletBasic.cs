@@ -13,6 +13,7 @@ namespace VP_Project.Model.Bullet
             this.spawnX = spawnX;
             this.spawnY = spawnY;
             SPEED = 37;
+            
             CreateBullet();
         }
 
@@ -60,6 +61,19 @@ namespace VP_Project.Model.Bullet
                         bulletSprite.Dispose();
                         bulletSprite = null;
                         GC.Collect();
+                    }
+                }
+                if(control.Name == "ENEMY_1" || control.Name == "ENEMY_2")
+                {
+                    if(bulletSprite != null)
+                    {
+                        if (bulletSprite.Bounds.IntersectsWith(control.Bounds))
+                        {
+                            bulletSprite.Dispose();
+                            bulletSprite = null;
+                            control.Dispose();
+                            GC.Collect();
+                        }
                     }
                 }
             }

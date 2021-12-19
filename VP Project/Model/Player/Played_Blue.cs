@@ -36,6 +36,8 @@ namespace VP_Project.Model.Player
             playerSprite.Show();
             playerSprite.Location = new System.Drawing.Point(spawnX, spawnY);
             playerSprite.BackColor = System.Drawing.Color.Transparent;
+
+
         }
     }
 }

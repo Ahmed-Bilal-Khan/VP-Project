@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Timers;
+using Timer = System.Windows.Forms.Timer;
 
-namespace VP_Project.Model
+namespace VP_Project.Model.Game
 {
     enum GAME_TYPE { ENDLESS, STORY, PVP};
     internal class Game
@@ -9,7 +12,8 @@ namespace VP_Project.Model
         Player.Player player;
         GAME_TYPE type;
         Control parent;
-        Panel topBoundary;
+        public static Timer timer;
+        List<Player.Enemy> enemies;
 
         // Input Checks
         Boolean rightPressed;
@@ -25,20 +29,10 @@ namespace VP_Project.Model
             switch(type)
             {
                 case GAME_TYPE.ENDLESS:
-                    player = new Player.Played_Blue(this.parent, 400, 500);
+                    Create_Endless();
                     break;
             }
 
-            foreach (Control c in parent.Controls)
-            {
-                if (c is Panel)
-                {
-                    if(c.Name == "BoundaryTop")
-                    {
-                        topBoundary = (Panel)c;
-                    }
-                }
-            }
         }
 
         public bool RightPressed { get => rightPressed; set => rightPressed = value; }
@@ -72,8 +66,6 @@ namespace VP_Project.Model
             }
         }
 
-
-
         public void MoveBullet()
         {
             for(int i = 0; i < player.Bullets.Count; i++)
@@ -89,29 +81,105 @@ namespace VP_Project.Model
                     player.Bullets.RemoveAt(i);
                 }
             }
-            //foreach (Control c in parent.Controls)
-            //{
-            //    if (c is PictureBox)
-            //    {
-            //        PictureBox bulletBox = (PictureBox)c;
-            //        if (c.Name == "BulletSimple")
-            //        {
-            //            bulletBox.Location = new System.Drawing.Point(bulletBox.Location.X, bulletBox.Location.Y - 32);
+        }
 
-            //        }
-            //        if (c.Name == "BulletMedium")
-            //        {
-            //            bulletBox.Location = new System.Drawing.Point(bulletBox.Location.X, bulletBox.Location.Y - 37);
+        public void MoveEnemy()
+        {
+            for(int i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i].IsWasted())
+                {
+                    enemies.RemoveAt(i);
+                }
+                if (!enemies[i].IsWasted())
+                {
+                    enemies[i].MoveBackward();
+                    enemies[i].CheckCollision();
 
-            //        }
-            //        if(c.Bounds.IntersectsWith(topBoundary.Bounds))
-            //        if (bulletBox.Location.Y == 600)
-            //        {
-            //            bulletBox = null;
-            //            bulletBox.Dispose();
-            //        }
-            //    }
-            //}
+                }
+            }
+        }
+        private void Create_Endless()
+        {
+            if(Menu.state == GAME_STATE.GAME_END)
+            {
+                timer.Stop();
+                timer.Enabled = false;
+            }
+            else if(Menu.state == GAME_STATE.GAME_START)
+            {
+                switch (Menu.count)
+                {
+                    case 0:
+                        player = new Player.Player_Red(this.parent, 400, 500);
+                        break;
+                    case 1:
+                        player = new Player.Played_Green(this.parent, 300, 500);
+                        break;
+                    case 2:
+                        player = new Player.Played_Blue(this.parent, 350, 500);
+                        break;
+                    case 3:
+                        player = new Player.Player_Yellow(this.parent, 400, 500);
+                        break;
+                }
+                player.SetName("Player");
+                enemies = new List<Player.Enemy>();
+
+                timer = new Timer();
+                timer.Interval = 1000;
+                timer.Tick += new EventHandler(SpawnEnemy);
+                timer.Enabled = true;
+                timer.Start();
+            }
+        }
+        public void Update()
+        {
+            if (Menu.state == GAME_STATE.GAME_START && player != null)
+            {
+                CheckInput();
+                MoveBullet();
+                MoveEnemy();
+            }
+            if(player == null)
+            {
+                timer.Stop();
+                timer.Enabled = false;
+                timer = new Timer();
+            }
+            
+        }
+        private void SpawnEnemy(object sender, EventArgs e)
+        {
+            if(player != null)
+            {
+                Random rand = new Random();
+                Random rand2 = new Random();
+
+
+                int spawnY = 3;
+                int spawnX = rand.Next(10, 790);
+
+                Player.Enemy enemy = new Player.Enemy(parent, (Player.ENEMY_TYPE)rand2.Next(0, 2), spawnX, spawnY);
+                enemies.Add(enemy);
+
+                player.CheckCollision();
+                if (player.IsWasted())
+                {
+                    Menu.state = GAME_STATE.GAME_END;
+                    DestroyGame();
+                }
+            }
+        }
+
+        private void DestroyGame()
+        {
+            player = null;
+            foreach(Player.Enemy enemy in enemies)
+            {
+                enemy.DestroySelf();
+            }
+            GC.Collect();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace VP_Project.Model.Player
     {
         public Player_Red(Control parent, int spawnX, int spawnY)
         {
-            SPEED = 7;
+            SPEED = 11;
             playerHealth = 100;
             base.parent = parent;
             base.spawnX = spawnX;
