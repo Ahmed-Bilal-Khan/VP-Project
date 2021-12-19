@@ -18,9 +18,8 @@ namespace VP_Project.Model.Player
         protected override void SetPlayerSprite()
         {
             playerSprite = new PictureBox();
-            playerSprite.Image = Properties.Resources.red_plane_temp;
+            playerSprite.Image = Properties.Resources.plane_red;
             playerSprite.Size = new System.Drawing.Size(32, 32);
-            //playerSprite.Parent = parent;
             parent.Controls.Add(playerSprite);
             playerSprite.Show();
             playerSprite.Location = new System.Drawing.Point(spawnX, spawnY);
@@ -28,7 +27,11 @@ namespace VP_Project.Model.Player
         }
         public override void Shoot()
         {
-            throw new NotImplementedException();
+            Bullet.Bullet bullet = new Model.Bullet.BulletBasic(
+                parent: parent,
+                type: Bullet.BULLET_TYPE.RED,
+                spawnX: playerSprite.Location.X+10,
+                spawnY: playerSprite.Location.Y);
         }
     }
 }

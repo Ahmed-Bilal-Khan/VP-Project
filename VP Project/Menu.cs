@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 using VP_Project.Model;
 
@@ -10,11 +11,15 @@ namespace VP_Project
     {
         Game game;
         GAME_STATE state;
+
+        Graphics graphics;
+
         public Menu()
         {
             InitializeComponent();
             state = GAME_STATE.GAME_PAUSE;
             this.DoubleBuffered = true;
+            
         }
 
         private void InitGame()
@@ -39,6 +44,7 @@ namespace VP_Project
             if (state == GAME_STATE.GAME_START)
             {
                 game.CheckInput();
+                game.MoveBullet();
             }
                 
         }
@@ -85,7 +91,7 @@ namespace VP_Project
 
             if (e.KeyCode == Keys.Space)
             {
-                // game.player.Shoot();
+                game.ShootPressed = true;
             }
         }
 

@@ -16,6 +16,7 @@ namespace VP_Project.Model
         Boolean leftPressed;
         Boolean upPressed;
         Boolean downPressed;
+        Boolean shootPressed;
 
         public Game(GAME_TYPE type, Control parent)
         {
@@ -24,7 +25,7 @@ namespace VP_Project.Model
             switch(type)
             {
                 case GAME_TYPE.ENDLESS:
-                    player = new Player.Player_Red(this.parent, 400, 500);
+                    player = new Player.Player_Yellow(this.parent, 400, 500);
                     break;
             }
         }
@@ -33,24 +34,30 @@ namespace VP_Project.Model
         public bool LeftPressed { get => leftPressed; set => leftPressed = value; }
         public bool UpPressed { get => upPressed; set => upPressed = value; }
         public bool DownPressed { get => downPressed; set => downPressed = value; }
+        public bool ShootPressed { get => shootPressed; set => shootPressed = value; }
 
         public void CheckInput()
         {
-            if (rightPressed && !leftPressed)
+            if (RightPressed && !LeftPressed)
             {
                 player.MoveRight();
             }
-            if (DownPressed && !UpPressed)
+            if (DownPressed && !UpPressed && !LeftPressed && !RightPressed)
             {
                 player.MoveBackward();
             }
-            if (UpPressed && !DownPressed)
+            if (UpPressed && !DownPressed && !LeftPressed && !RightPressed)
             {
                 player.MoveForward();
             }
             if (LeftPressed && !RightPressed)
             {
                 player.MoveLeft();
+            }
+            if(ShootPressed)
+            {
+                player.Shoot();
+                ShootPressed = false;
             }
         }
 
@@ -61,7 +68,7 @@ namespace VP_Project.Model
                 if (c is PictureBox)
                 {
                     PictureBox bulletBox = (PictureBox)c;
-                    if (c.Name == "Bullet")
+                    if (c.Name == "BulletSimple")
                     {
                         bulletBox.Location = new System.Drawing.Point(bulletBox.Location.X, bulletBox.Location.Y - 32);
 

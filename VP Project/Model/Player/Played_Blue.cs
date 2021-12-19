@@ -5,21 +5,35 @@ namespace VP_Project.Model.Player
 {
     internal class Played_Blue : Player
     {
-        Played_Blue()
+        public Played_Blue(Control parent, int spawnX, int spawnY)
         {
-            SPEED = 7;
+            SPEED = 9;
             playerHealth = 100;
-            playerSprite = new PictureBox();
+            base.parent = parent;
+            base.spawnX = spawnX;
+            base.spawnY = spawnY;
+            SetPlayerSprite();
         }
 
         public override void Shoot()
         {
-            throw new NotImplementedException();
+            Bullet.Bullet bullet = new Model.Bullet.BulletBasic(
+                parent: parent,
+                type: Bullet.BULLET_TYPE.BLUE,
+                playerSprite.Location.X+10,
+                playerSprite.Location.Y
+                );
         }
 
         protected override void SetPlayerSprite()
         {
-            throw new NotImplementedException();
+            playerSprite = new PictureBox();
+            playerSprite.Image = Properties.Resources.plane_blue;
+            playerSprite.Size = new System.Drawing.Size(32, 32);
+            parent.Controls.Add(playerSprite);
+            playerSprite.Show();
+            playerSprite.Location = new System.Drawing.Point(spawnX, spawnY);
+            playerSprite.BackColor = System.Drawing.Color.Transparent;
         }
     }
 }
