@@ -73,7 +73,6 @@ namespace VP_Project.Model.Player
                     playerSprite.Name = "ENEMY_2";
                     break;
             }
-
             playerSprite.Size = new System.Drawing.Size(32, 32);
             parent.Controls.Add(playerSprite);
             playerSprite.Show();

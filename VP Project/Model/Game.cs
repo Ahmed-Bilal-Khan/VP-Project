@@ -165,6 +165,7 @@ namespace VP_Project.Model.Game
             if(pickupExists)
             {
                 timeSinceAppearance++;
+                if(player != null)
                 if (laserBox.Bounds.IntersectsWith(player.PlayerSprite.Bounds))
                 {
                     player.ShootsLaser = true;
