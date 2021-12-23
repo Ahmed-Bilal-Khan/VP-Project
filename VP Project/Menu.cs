@@ -198,6 +198,42 @@ namespace VP_Project
             game = null;
             GC.Collect();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MenuHolder.Visible = true;
+            MenuPVP.Visible = false;
+        }
+
+        private void BtnPVPStart_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnP1Next_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnP2Next_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnP1Back_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnP2Back_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnPlaneBack_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
