@@ -9,7 +9,8 @@ namespace VP_Project.Model.Game
     internal class Game : IDisposable
     {
         Player.Player player;
-        GAME_TYPE type;
+        Player.Player player2;
+        private static GAME_TYPE type;
         Control parent;
         public static Timer timer;
         List<Player.Enemy> enemies;
@@ -22,11 +23,19 @@ namespace VP_Project.Model.Game
         PictureBox laserBox;
         Label scoreLabel;
         // Input Checks
-        Boolean rightPressed;
-        Boolean leftPressed;
-        Boolean upPressed;
-        Boolean downPressed;
-        Boolean shootPressed;
+        private Boolean rightPressed;
+        private Boolean leftPressed;
+        private Boolean upPressed;
+        private Boolean downPressed;
+        private Boolean shootPressed;
+
+        private Boolean p2_rightPressed;
+        private Boolean p2_leftPressed;
+        private Boolean p2_upPressed;
+        private Boolean p2_downPressed;
+        private Boolean p2_shootPressed;
+
+        // Misc
         static Boolean pickupExists;
         static Boolean playerHasPickup;
         Random r = new Random();
@@ -37,7 +46,7 @@ namespace VP_Project.Model.Game
             appearTime = 0;
             SCORE = 0;
             appearDelay = r.Next(8, 13);
-            this.type = type;
+            Game.type = type;
             this.parent = parent;
             scoreLabel = new Label();
             scoreLabel.Text = ($"SCORE: {SCORE}");
@@ -53,6 +62,9 @@ namespace VP_Project.Model.Game
                 case GAME_TYPE.ENDLESS:
                     Create_Endless();
                     break;
+                case GAME_TYPE.PVP:
+                    Create_PvP();
+                    break;
             }
 
         }
@@ -62,6 +74,12 @@ namespace VP_Project.Model.Game
         public bool UpPressed { get => upPressed; set => upPressed = value; }
         public bool DownPressed { get => downPressed; set => downPressed = value; }
         public bool ShootPressed { get => shootPressed; set => shootPressed = value; }
+        internal static GAME_TYPE Type { get => type; }
+        public bool P2_rightPressed { get => p2_rightPressed; set => p2_rightPressed = value; }
+        public bool P2_leftPressed { get => p2_leftPressed; set => p2_leftPressed = value; }
+        public bool P2_upPressed { get => p2_upPressed; set => p2_upPressed = value; }
+        public bool P2_downPressed { get => p2_downPressed; set => p2_downPressed = value; }
+        public bool P2_shootPressed { get => p2_shootPressed; set => p2_shootPressed = value; }
 
         public void CheckInput()
         {
@@ -69,22 +87,47 @@ namespace VP_Project.Model.Game
             {
                 player.MoveRight();
             }
+            if(P2_rightPressed && !P2_leftPressed && type == GAME_TYPE.PVP)
+            {
+                player2.MoveRight();
+            } 
+
             if (DownPressed && !UpPressed && !LeftPressed && !RightPressed)
             {
                 player.MoveBackward();
             }
+            if (P2_downPressed && !P2_leftPressed && !P2_rightPressed && type == GAME_TYPE.PVP)
+            {
+                player2.MoveBackward();
+            }
+
             if (UpPressed && !DownPressed && !LeftPressed && !RightPressed)
             {
                 player.MoveForward();
             }
+            if (P2_upPressed && !P2_downPressed && !P2_leftPressed && !P2_rightPressed && type == GAME_TYPE.PVP)
+            {
+                player2.MoveForward();
+            }
+
             if (LeftPressed && !RightPressed)
             {
                 player.MoveLeft();
             }
-            if(ShootPressed)
+            if (P2_leftPressed && !P2_rightPressed && type == GAME_TYPE.PVP)
+            {
+                player2.MoveLeft();
+            }
+
+            if (ShootPressed)
             {
                 player.Shoot();
                 ShootPressed = false;
+            }
+            if(P2_shootPressed)
+            {
+                player2.Shoot();
+                P2_shootPressed = false;
             }
         }
 
@@ -107,6 +150,28 @@ namespace VP_Project.Model.Game
                 else
                 {
                     player.Bullets.RemoveAt(i);
+                }
+            }
+
+            if(type == GAME_TYPE.PVP)
+            {
+                for (int i = 0; i < player2.Bullets.Count; i++)
+                {
+                    if (!player2.Bullets[i].IsWasted())
+                    {
+                        player2.Bullets[i].MoveBullet();
+                        player2.Bullets[i].CheckCollision();
+                    }
+                    else if (player2.Bullets[i].IsWasted() && player2.Bullets[i].ShotEnemy)
+                    {
+                        player2.Bullets.RemoveAt(i);
+                        SCORE++;
+                        scoreLabel.Text = $"SCORE: {SCORE}";
+                    }
+                    else
+                    {
+                        player2.Bullets.RemoveAt(i);
+                    }
                 }
             }
         }
@@ -281,6 +346,64 @@ namespace VP_Project.Model.Game
             SCORE = 0;
             timer.Dispose();
             enemies.Clear();
+        }
+
+        private void Create_PvP()
+        {
+            if (Menu.state == GAME_STATE.GAME_END)
+            {
+                timer.Stop();
+                timer.Enabled = false;
+            }
+            else if (Menu.state == GAME_STATE.GAME_START)
+            {
+                switch (Menu.count)
+                {
+                    case 0:
+                        player = new Player.Player_Red(this.parent, 400, 500);
+                        break;
+                    case 1:
+                        player = new Player.Played_Green(this.parent, 300, 500);
+                        break;
+                    case 2:
+                        player = new Player.Played_Blue(this.parent, 350, 500);
+                        break;
+                    case 3:
+                        player = new Player.Player_Yellow(this.parent, 400, 500);
+                        break;
+                }
+                switch (Menu.countp2)
+                {
+                    case 0:
+                        player2 = new Player.Player_Red(this.parent, 400, 100);
+                        break;
+                    case 1:
+                        player2 = new Player.Played_Green(this.parent, 300, 100);
+                        break;
+                    case 2:
+                        player2 = new Player.Played_Blue(this.parent, 350, 100);
+                        break;
+                    case 3:
+                        player2 = new Player.Player_Yellow(this.parent, 400, 100);
+                        break;
+                }
+                player2.SetName("Player_2");
+            }
+        }
+        public void UpdatePvP()
+        {
+            if (Menu.state == GAME_STATE.GAME_START && (player != null && player2 != null))
+            {
+                CheckInput();
+                MoveBullet();
+            }
+            if (player == null)
+            {
+                timer.Stop();
+                timer.Enabled = false;
+                timer = new Timer();
+            }
+
         }
     }
 }

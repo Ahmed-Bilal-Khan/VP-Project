@@ -51,15 +51,15 @@ namespace VP_Project
             this.button4 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.MenuPVP = new System.Windows.Forms.Panel();
+            this.BtnP2Next = new System.Windows.Forms.PictureBox();
+            this.BtnP2Back = new System.Windows.Forms.PictureBox();
+            this.P2Select = new System.Windows.Forms.PictureBox();
             this.BtnPVPStart = new System.Windows.Forms.Button();
             this.BtnP1Next = new System.Windows.Forms.PictureBox();
             this.BtnP1Back = new System.Windows.Forms.PictureBox();
             this.P1Select = new System.Windows.Forms.PictureBox();
             this.button6 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.BtnP2Next = new System.Windows.Forms.PictureBox();
-            this.BtnP2Back = new System.Windows.Forms.PictureBox();
-            this.P2Select = new System.Windows.Forms.PictureBox();
             this.MenuHolder.SuspendLayout();
             this.MENU_ENDLESS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -67,12 +67,12 @@ namespace VP_Project
             ((System.ComponentModel.ISupportInitialize)(this.PlaneSelectBox)).BeginInit();
             this.MenuGameOver.SuspendLayout();
             this.MenuPVP.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BtnP1Next)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BtnP1Back)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.P1Select)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnP2Next)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnP2Back)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.P2Select)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnP1Next)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnP1Back)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.P1Select)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -131,6 +131,7 @@ namespace VP_Project
             this.button3.TabIndex = 3;
             this.button3.Text = "PvP Mode";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             this.button3.MouseLeave += new System.EventHandler(this.button3_MouseLeave);
             this.button3.MouseHover += new System.EventHandler(this.button3_MouseHover);
             // 
@@ -321,6 +322,40 @@ namespace VP_Project
             this.MenuPVP.TabIndex = 10;
             this.MenuPVP.Visible = false;
             // 
+            // BtnP2Next
+            // 
+            this.BtnP2Next.BackColor = System.Drawing.Color.Transparent;
+            this.BtnP2Next.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnP2Next.BackgroundImage")));
+            this.BtnP2Next.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnP2Next.Location = new System.Drawing.Point(410, 207);
+            this.BtnP2Next.Name = "BtnP2Next";
+            this.BtnP2Next.Size = new System.Drawing.Size(59, 88);
+            this.BtnP2Next.TabIndex = 11;
+            this.BtnP2Next.TabStop = false;
+            this.BtnP2Next.Click += new System.EventHandler(this.BtnP2Next_Click);
+            // 
+            // BtnP2Back
+            // 
+            this.BtnP2Back.BackColor = System.Drawing.Color.Transparent;
+            this.BtnP2Back.BackgroundImage = global::VP_Project.Properties.Resources.btn_left1;
+            this.BtnP2Back.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnP2Back.Location = new System.Drawing.Point(85, 210);
+            this.BtnP2Back.Name = "BtnP2Back";
+            this.BtnP2Back.Size = new System.Drawing.Size(59, 88);
+            this.BtnP2Back.TabIndex = 10;
+            this.BtnP2Back.TabStop = false;
+            this.BtnP2Back.Click += new System.EventHandler(this.BtnP2Back_Click);
+            // 
+            // P2Select
+            // 
+            this.P2Select.BackgroundImage = global::VP_Project.Properties.Resources.plane_red;
+            this.P2Select.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.P2Select.Location = new System.Drawing.Point(153, 211);
+            this.P2Select.Name = "P2Select";
+            this.P2Select.Size = new System.Drawing.Size(251, 84);
+            this.P2Select.TabIndex = 9;
+            this.P2Select.TabStop = false;
+            // 
             // BtnPVPStart
             // 
             this.BtnPVPStart.BackColor = System.Drawing.Color.Silver;
@@ -389,45 +424,11 @@ namespace VP_Project
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.Silver;
-            this.label4.Location = new System.Drawing.Point(83, 25);
+            this.label4.Location = new System.Drawing.Point(51, 19);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(411, 91);
+            this.label4.Size = new System.Drawing.Size(446, 91);
             this.label4.TabIndex = 0;
-            this.label4.Text = "ENDLESS";
-            // 
-            // BtnP2Next
-            // 
-            this.BtnP2Next.BackColor = System.Drawing.Color.Transparent;
-            this.BtnP2Next.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnP2Next.BackgroundImage")));
-            this.BtnP2Next.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnP2Next.Location = new System.Drawing.Point(410, 206);
-            this.BtnP2Next.Name = "BtnP2Next";
-            this.BtnP2Next.Size = new System.Drawing.Size(59, 88);
-            this.BtnP2Next.TabIndex = 11;
-            this.BtnP2Next.TabStop = false;
-            this.BtnP2Next.Click += new System.EventHandler(this.BtnP2Next_Click);
-            // 
-            // BtnP2Back
-            // 
-            this.BtnP2Back.BackColor = System.Drawing.Color.Transparent;
-            this.BtnP2Back.BackgroundImage = global::VP_Project.Properties.Resources.btn_left1;
-            this.BtnP2Back.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnP2Back.Location = new System.Drawing.Point(85, 209);
-            this.BtnP2Back.Name = "BtnP2Back";
-            this.BtnP2Back.Size = new System.Drawing.Size(59, 88);
-            this.BtnP2Back.TabIndex = 10;
-            this.BtnP2Back.TabStop = false;
-            this.BtnP2Back.Click += new System.EventHandler(this.BtnP2Back_Click);
-            // 
-            // P2Select
-            // 
-            this.P2Select.BackgroundImage = global::VP_Project.Properties.Resources.plane_red;
-            this.P2Select.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.P2Select.Location = new System.Drawing.Point(153, 210);
-            this.P2Select.Name = "P2Select";
-            this.P2Select.Size = new System.Drawing.Size(251, 84);
-            this.P2Select.TabIndex = 9;
-            this.P2Select.TabStop = false;
+            this.label4.Text = "PvP MODE";
             // 
             // Menu
             // 
@@ -462,12 +463,12 @@ namespace VP_Project
             this.MenuGameOver.PerformLayout();
             this.MenuPVP.ResumeLayout(false);
             this.MenuPVP.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BtnP1Next)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BtnP1Back)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.P1Select)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnP2Next)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnP2Back)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.P2Select)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnP1Next)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnP1Back)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.P1Select)).EndInit();
             this.ResumeLayout(false);
 
         }

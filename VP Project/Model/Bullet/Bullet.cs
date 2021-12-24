@@ -19,5 +19,16 @@ namespace VP_Project.Model.Bullet
         protected bool shotEnemy;
 
         public bool ShotEnemy { get => shotEnemy; }
+
+        public virtual void SetName(string name)
+        {
+            bulletSprite.Name = name;
+
+            if (name == "Player_2_Bullet")
+            {
+                bulletSprite.Image.RotateFlip(System.Drawing.RotateFlipType.RotateNoneFlipY);
+                SPEED = -SPEED;
+            }
+        }
     }
 }

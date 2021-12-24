@@ -28,6 +28,10 @@ namespace VP_Project.Model.Player
                 type: bulletType,
                 spawnX: playerSprite.Location.X + 10,
                 spawnY: playerSprite.Location.Y);
+            if (playerSprite.Name == "Player_2")
+            {
+                bullet.SetName("Player_2_Bullet");
+            }
             bullets.Add(bullet);
         }
 

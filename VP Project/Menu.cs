@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Windows.Forms;
 using VP_Project.Model.Game;
 
@@ -12,19 +11,19 @@ namespace VP_Project
         Game game;
         public static GAME_STATE state;
         public static int count = 0;
+        public static int countp2 = 0;
         public Menu()
         {
             InitializeComponent();
             state = GAME_STATE.GAME_WAIT;
             this.DoubleBuffered = true;
-            
         }
 
-        private void InitGame()
+        private void InitGame(GAME_TYPE gameType)
         {
             state = GAME_STATE.GAME_START;
             game = new Game(
-                type: GAME_TYPE.ENDLESS,
+                type: gameType,
                 parent: this
                 );
             
@@ -37,11 +36,26 @@ namespace VP_Project
             MenuHolder.Visible = false;
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // TODO ... Well do something else here
+            MenuPVP.Visible = true;
+            MenuHolder.Visible = false;
+        }
+
         private void Update_Tick(object sender, EventArgs e)
         {
+            
             if (state == GAME_STATE.GAME_START)
             {
-                game.Update();
+                if (Game.Type == GAME_TYPE.ENDLESS)
+                {
+                    game.Update();
+                }
+                else
+                {
+                    game.UpdatePvP();
+                }
             }
             if(state == GAME_STATE.GAME_END)
             {
@@ -56,18 +70,36 @@ namespace VP_Project
             {
                 game.UpPressed = true;
             }
+            if(e.KeyCode.Equals(Keys.Up))
+            {
+                game.P2_upPressed = true;
+            }
 
             if (e.KeyCode.Equals(Keys.D))
             {
                 game.RightPressed = true;
             }
+            if (e.KeyCode.Equals(Keys.Right))
+            {
+                game.P2_rightPressed = true;
+            }
+
             if (e.KeyCode.Equals(Keys.S))
             {
                 game.DownPressed = true;
             }
+            if (e.KeyCode.Equals(Keys.Down))
+            {
+                game.P2_downPressed = true;
+            }
+
             if (e.KeyCode.Equals(Keys.A))
             {
                 game.LeftPressed = true;
+            }
+            if (e.KeyCode.Equals(Keys.Left))
+            {
+                game.P2_leftPressed = true;
             }
         }
 
@@ -77,22 +109,45 @@ namespace VP_Project
             {
                 game.RightPressed = false;
             }
+            if (e.KeyCode == Keys.Right)
+            {
+                game.P2_rightPressed = false;
+            }
+
             if (e.KeyCode == Keys.S)
             {
                 game.DownPressed = false;
             }
+            if (e.KeyCode == Keys.Down)
+            {
+                game.P2_downPressed = false;
+            }
+
             if (e.KeyCode == Keys.A)
             {
                 game.LeftPressed = false;
             }
+            if (e.KeyCode == Keys.Left)
+            {
+                game.P2_leftPressed = false;
+            }
+
             if (e.KeyCode.Equals(Keys.W))
             {
                 game.UpPressed = false;
+            }
+            if (e.KeyCode == Keys.Up)
+            {
+                game.P2_upPressed = false;
             }
 
             if (e.KeyCode == Keys.Space)
             {
                 game.ShootPressed = true;
+            }
+            if (e.KeyCode == Keys.L)
+            {
+                game.P2_shootPressed = true;
             }
         }
 
@@ -184,7 +239,7 @@ namespace VP_Project
         private void BtnStart_Click(object sender, EventArgs e)
         {
             MENU_ENDLESS.Visible = false;
-            InitGame();
+            InitGame(GAME_TYPE.ENDLESS);
             this.Focus();
         }
 
@@ -207,32 +262,139 @@ namespace VP_Project
 
         private void BtnPVPStart_Click(object sender, EventArgs e)
         {
-
+            MenuPVP.Visible = false;
+            InitGame(GAME_TYPE.PVP);
+            this.Focus();
         }
 
         private void BtnP1Next_Click(object sender, EventArgs e)
         {
-
+            count++;
+            if (count == 4)
+            {
+                count = 0;
+            }
+            switch (count)
+            {
+                case 0:
+                    P1Select.BackgroundImage = Properties.Resources.plane_red;
+                    break;
+                case 1:
+                    P1Select.BackgroundImage = Properties.Resources.plane_green;
+                    break;
+                case 2:
+                    P1Select.BackgroundImage = Properties.Resources.plane_blue;
+                    break;
+                case 3:
+                    P1Select.BackgroundImage = Properties.Resources.plane_yellow;
+                    break;
+            }
         }
 
         private void BtnP2Next_Click(object sender, EventArgs e)
         {
-
+            countp2++;
+            if (countp2 == 4)
+            {
+                countp2 = 0;
+            }
+            switch (countp2)
+            {
+                case 0:
+                    P2Select.BackgroundImage = Properties.Resources.plane_red;
+                    break;
+                case 1:
+                    P2Select.BackgroundImage = Properties.Resources.plane_green;
+                    break;
+                case 2:
+                    P2Select.BackgroundImage = Properties.Resources.plane_blue;
+                    break;
+                case 3:
+                    P2Select.BackgroundImage = Properties.Resources.plane_yellow;
+                    break;
+            }
         }
 
         private void BtnP1Back_Click(object sender, EventArgs e)
         {
-
+            
+            if (count == 0)
+            {
+                count = 3;
+            }
+            else
+            {
+                count--;
+            }
+            switch (count)
+            {
+                case 0:
+                    P1Select.BackgroundImage = Properties.Resources.plane_red;
+                    break;
+                case 1:
+                    P1Select.BackgroundImage = Properties.Resources.plane_green;
+                    break;
+                case 2:
+                    P1Select.BackgroundImage = Properties.Resources.plane_blue;
+                    break;
+                case 3:
+                    P1Select.BackgroundImage = Properties.Resources.plane_yellow;
+                    break;
+            }
         }
 
         private void BtnP2Back_Click(object sender, EventArgs e)
         {
-
+            if (countp2 == 0)
+            {
+                countp2 = 3;
+            }
+            else
+            {
+                countp2--;
+            }
+            switch (countp2)
+            {
+                case 0:
+                    P2Select.BackgroundImage = Properties.Resources.plane_red;
+                    break;
+                case 1:
+                    P2Select.BackgroundImage = Properties.Resources.plane_green;
+                    break;
+                case 2:
+                    P2Select.BackgroundImage = Properties.Resources.plane_blue;
+                    break;
+                case 3:
+                    P2Select.BackgroundImage = Properties.Resources.plane_yellow;
+                    break;
+            }
         }
 
         private void BtnPlaneBack_Click(object sender, EventArgs e)
         {
-
+            if (count == 0)
+            {
+                count = 3;
+            }
+            else
+            {
+                count--;
+            }
+            switch (count)
+            {
+                case 0:
+                    PlaneSelectBox.BackgroundImage = Properties.Resources.plane_red;
+                    break;
+                case 1:
+                    PlaneSelectBox.BackgroundImage = Properties.Resources.plane_green;
+                    break;
+                case 2:
+                    PlaneSelectBox.BackgroundImage = Properties.Resources.plane_blue;
+                    break;
+                case 3:
+                    PlaneSelectBox.BackgroundImage = Properties.Resources.plane_yellow;
+                    break;
+            }
         }
     }
 

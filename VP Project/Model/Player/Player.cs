@@ -47,6 +47,11 @@ namespace VP_Project.Model.Player
         public virtual void SetName(String name)
         {
             playerSprite.Name = name;
+
+            if(name == "Player_2")
+            {
+                playerSprite.Image.RotateFlip(System.Drawing.RotateFlipType.RotateNoneFlipY);
+            }
         }
 
         public virtual bool IsWasted()
@@ -55,25 +60,25 @@ namespace VP_Project.Model.Player
         }
         public void MoveForward()
         {
-            this.playerSprite.Top -= SPEED;
+                playerSprite.Top -= SPEED;
         }
         public void MoveBackward()
         {
-            this.playerSprite.Top += SPEED;
+
+                playerSprite.Top += SPEED;
         }
         public void MoveLeft()
         {
-            this.playerSprite.Left -= SPEED;
+                playerSprite.Left -= SPEED;
         }
         public void MoveRight()
         {
-            this.playerSprite.Left += SPEED;
+                playerSprite.Left += SPEED;
         }
 
         public void Dispose()
         {
             playerSprite.Dispose();
-
         }
     }
 }

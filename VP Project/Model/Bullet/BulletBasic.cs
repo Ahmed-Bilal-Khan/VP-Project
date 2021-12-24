@@ -54,6 +54,8 @@ namespace VP_Project.Model.Bullet
             bulletSprite.Show();
             bulletSprite.Name = "BulletSimple";
             bulletSprite.BackColor = System.Drawing.Color.Transparent;
+
+            
         }
 
         public override void MoveBullet()
