@@ -72,13 +72,12 @@ namespace VP_Project.Model.Bullet
                     if (bulletSprite.Bounds.IntersectsWith(control.Bounds))
                     {
                         bulletSprite.Dispose();
-                        bulletSprite = null;
                         GC.Collect();
                     }
                 }
                 if(control.Name == "ENEMY_1" || control.Name == "ENEMY_2")
                 {
-                    if(bulletSprite != null)
+                    if(!bulletSprite.IsDisposed)
                     {
                         if (bulletSprite.Bounds.IntersectsWith(control.Bounds))
                         {
@@ -90,7 +89,6 @@ namespace VP_Project.Model.Bullet
                             else
                             {
                                 bulletSprite.Dispose();
-                                bulletSprite = null;
                             }
                             control.Dispose();
                             GC.Collect();
@@ -103,7 +101,7 @@ namespace VP_Project.Model.Bullet
 
         public override bool IsWasted()
         {
-            return (bulletSprite == null);
+            return (bulletSprite.IsDisposed);
         }
     }
 }

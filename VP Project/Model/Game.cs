@@ -18,10 +18,10 @@ namespace VP_Project.Model.Game
         static int appearTime;
         static int appearDelay;
         static int timeSinceAppearance;
-        static int setPlayerToNormal;
         static int SCORE;
         PictureBox laserBox;
         Label scoreLabel;
+        Label healthLabel;
         // Input Checks
         private Boolean rightPressed;
         private Boolean leftPressed;
@@ -37,7 +37,6 @@ namespace VP_Project.Model.Game
 
         // Misc
         static Boolean pickupExists;
-        static Boolean playerHasPickup;
         Random r = new Random();
 
         public Game(GAME_TYPE type, Control parent)
@@ -48,15 +47,7 @@ namespace VP_Project.Model.Game
             appearDelay = r.Next(8, 13);
             Game.type = type;
             this.parent = parent;
-            scoreLabel = new Label();
-            scoreLabel.Text = ($"SCORE: {SCORE}");
-            scoreLabel.Parent = parent;
-            scoreLabel.Location = new System.Drawing.Point(4, 17);
-            scoreLabel.Size = new System.Drawing.Size(150, 24);
-            scoreLabel.ForeColor = System.Drawing.Color.Silver;
-            scoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16);
-            scoreLabel.Show();
-            scoreLabel.BackColor = System.Drawing.Color.Transparent;
+            
             switch (type)
             {
                 case GAME_TYPE.ENDLESS:
@@ -194,7 +185,7 @@ namespace VP_Project.Model.Game
         }
         private void Create_Endless()
         {
-            if(Menu.state == GAME_STATE.GAME_END)
+            if (Menu.state == GAME_STATE.GAME_END)
             {
                 timer.Stop();
                 timer.Enabled = false;
@@ -224,7 +215,33 @@ namespace VP_Project.Model.Game
                 timer.Tick += new EventHandler(SpawnEnemy);
                 timer.Enabled = true;
                 timer.Start();
+
+                CreateEndlessLabel();
             }
+        }
+
+        private void CreateEndlessLabel()
+        {
+            // Create Score Label
+            scoreLabel = new Label();
+            scoreLabel.Text = ($"SCORE: {SCORE}");
+            scoreLabel.Parent = parent;
+            scoreLabel.Location = new System.Drawing.Point(4, 17);
+            scoreLabel.Size = new System.Drawing.Size(150, 24);
+            scoreLabel.ForeColor = System.Drawing.Color.Silver;
+            scoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16);
+            scoreLabel.Show();
+            scoreLabel.BackColor = System.Drawing.Color.Transparent;
+
+            healthLabel = new Label();
+            healthLabel.Text = ($"Health: {player.PlayerHealth}");
+            healthLabel.Parent = parent;
+            healthLabel.Location = new System.Drawing.Point(650, 17);
+            healthLabel.Size = new System.Drawing.Size(150, 24);
+            healthLabel.ForeColor = System.Drawing.Color.Silver;
+            healthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16);
+            healthLabel.Show();
+            healthLabel.BackColor = System.Drawing.Color.Transparent;
         }
         public void Update()
         {
@@ -233,6 +250,7 @@ namespace VP_Project.Model.Game
                 CheckInput();
                 MoveBullet();
                 MoveEnemy();
+                healthLabel.Text = $"Health: {player.PlayerHealth}";
             }
             if(player == null)
             {
@@ -245,7 +263,7 @@ namespace VP_Project.Model.Game
         private void SpawnEnemy(object sender, EventArgs e)
         {
             countdown++;
-            appearTime++;
+            //appearTime++;
             
             if(player != null)
             {
@@ -257,53 +275,56 @@ namespace VP_Project.Model.Game
                     DestroyGame();
                 }
 
-                if(appearTime == appearDelay)
+                //if(appearTime == appearDelay)
+                if(SCORE == 30)
                 {
                     SpawnLaser();
-                    appearDelay = r.Next(8, 13);
-                    appearTime = 0;
-                    timeSinceAppearance = 5;
+                    //appearDelay = r.Next(8, 13);
+                    //appearTime = 0;
+                    timeSinceAppearance = 8;
                     pickupExists = true;
                 }
-                if(timeSinceAppearance % 4 == 0 && pickupExists)
+                if(timeSinceAppearance % 7 == 0 && pickupExists)
                 {
                     laserBox.Dispose();
                     pickupExists = false;
                 }
 
-                if (countdown % 15 == 0)
+                if(SCORE >= 20 && SCORE < 45)
                 {
-                    if (timer.Interval >= 500)
-                    {
-                        timer.Interval -= 300;
-                    }
-                    else
-                    {
-                        AddEnemy(); // spawn twice
-                    }
+                    AddEnemy();
+                }
+                if(SCORE >= 45)
+                {
+                    AddEnemy();
+                    AddEnemy();
+                }
 
-                }
-                if (pickupExists)
-                {
-                    timeSinceAppearance++;
-                    if (player != null)
-                        if (laserBox.Bounds.IntersectsWith(player.PlayerSprite.Bounds))
-                        {
-                            player.ShootsLaser = true;
-                            playerHasPickup = true;
-                            setPlayerToNormal = 6;
-                            laserBox.Dispose();
-                        }
-                }
-                if (playerHasPickup)
-                {
-                    setPlayerToNormal++;
-                    if (setPlayerToNormal % 5 == 0)
-                    {
-                        player.ShootsLaser = false;
-                        setPlayerToNormal = 0;
-                    }
-                }
+                //if (countdown % 15 == 0)
+                //{
+                //    if (timer.Interval >= 500)
+                //    {
+                //        timer.Interval -= 300;
+                //    }
+                //    else
+                //    {
+                //        AddEnemy(); // spawn twice
+                //    }
+
+                //}
+
+                //if (pickupExists)
+                //{
+                //    timeSinceAppearance++;
+                //    if (player != null)
+                //        if (laserBox.Bounds.IntersectsWith(player.PlayerSprite.Bounds))
+                //        {
+                //            player.ShootsLaser = true;
+                //            playerHasPickup = true;
+                //            setPlayerToNormal = 6;
+                //            laserBox.Dispose();
+                //        }
+                //}
             }
         }
         private void AddEnemy ()
@@ -346,6 +367,9 @@ namespace VP_Project.Model.Game
             SCORE = 0;
             timer.Dispose();
             enemies.Clear();
+            if(laserBox != null)
+                laserBox.Dispose();
+            healthLabel.Dispose();
         }
 
         private void Create_PvP()
@@ -388,7 +412,32 @@ namespace VP_Project.Model.Game
                         break;
                 }
                 player2.SetName("Player_2");
+                player.SetName("Player_1");
+                SetHealthLabels();
             }
+        }
+
+        private void SetHealthLabels()
+        {
+            scoreLabel = new Label();
+            scoreLabel.Text = ($"Health: {player.PlayerHealth}");
+            scoreLabel.Parent = parent;
+            scoreLabel.Location = new System.Drawing.Point(4, 17);
+            scoreLabel.Size = new System.Drawing.Size(150, 24);
+            scoreLabel.ForeColor = System.Drawing.Color.Silver;
+            scoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16);
+            scoreLabel.Show();
+            scoreLabel.BackColor = System.Drawing.Color.Transparent;
+
+            healthLabel = new Label();
+            healthLabel.Text = ($"Health: {player2.PlayerHealth}");
+            healthLabel.Parent = parent;
+            healthLabel.Location = new System.Drawing.Point(4, 500);
+            healthLabel.Size = new System.Drawing.Size(150, 24);
+            healthLabel.ForeColor = System.Drawing.Color.Silver;
+            healthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16);
+            healthLabel.Show();
+            healthLabel.BackColor = System.Drawing.Color.Transparent;
         }
         public void UpdatePvP()
         {
@@ -396,6 +445,11 @@ namespace VP_Project.Model.Game
             {
                 CheckInput();
                 MoveBullet();
+                player.CheckPvPCollision();
+                player2.CheckPvPCollision();
+                healthLabel.Text = ($"Health: {player.PlayerHealth}");
+                scoreLabel.Text = ($"Health: {player2.PlayerHealth}");
+
             }
             if (player == null)
             {
@@ -403,7 +457,18 @@ namespace VP_Project.Model.Game
                 timer.Enabled = false;
                 timer = new Timer();
             }
+        }
 
+        private void CheckPvPWin()
+        {
+            if(player.PlayerHealth <= 0)
+            {
+
+            }
+            if(player2.PlayerHealth <= 0)
+            {
+
+            }
         }
     }
 }

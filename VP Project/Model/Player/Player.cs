@@ -4,6 +4,7 @@ using System;
 
 namespace VP_Project.Model.Player
 {
+    enum SHOOTING_MODE { SINGLE, DOUBLE, TRIPLE };
     internal abstract class Player : IDisposable
     {
         protected List<Bullet.Bullet> bullets;
@@ -15,28 +16,153 @@ namespace VP_Project.Model.Player
         protected int spawnY;
         protected bool playerDead;
         private bool shootsLaser;
+        protected SHOOTING_MODE shootingMode;
+        protected Bullet.BULLET_TYPE bulletType;
         public List<Bullet.Bullet> Bullets { get => bullets; set => bullets = value; }
         public bool ShootsLaser { get => shootsLaser; set => shootsLaser = value; }
         public PictureBox PlayerSprite { get => playerSprite; }
+        public double PlayerHealth { get => playerHealth; }
 
-        public abstract void Shoot();
-        protected abstract void SetPlayerSprite();
+        public virtual void Shoot()
+        {
+            if (bullets.Count == 0)
+            {
+                switch (shootingMode)
+                {
+                    case SHOOTING_MODE.SINGLE:
+                        ShootSingle();
+                        break;
+                    case SHOOTING_MODE.DOUBLE:
+                        ShootDouble();
+                        break;
+                }
+            }
+
+        }
+        public void ShootSingle()
+        {
+            if (ShootsLaser)
+            {
+                bulletType = Bullet.BULLET_TYPE.LASER;
+            }
+            Bullet.Bullet bullet = new Model.Bullet.BulletBasic(
+                parent: parent,
+                type: bulletType,
+                spawnX: playerSprite.Location.X + 10,
+                spawnY: playerSprite.Location.Y);
+            if (playerSprite.Name == "Player_2")
+            {
+                bullet.SetName("Player_2_Bullet");
+            }
+            if (playerSprite.Name == "Player_1")
+            {
+                bullet.SetName("Player_1_Bullet");
+            }
+            bullets.Add(bullet);
+        }
+
+        public virtual void ShootDouble()
+        {
+            if (ShootsLaser)
+            {
+                bulletType = Bullet.BULLET_TYPE.LASER;
+            }
+            Bullet.Bullet bullet = new Model.Bullet.BulletBasic(
+                parent: parent,
+                type: bulletType,
+                spawnX: playerSprite.Location.X - 10,
+                spawnY: playerSprite.Location.Y);
+            Bullet.Bullet bullet2 = new Model.Bullet.BulletBasic(
+                parent: parent,
+                type: bulletType,
+                spawnX: playerSprite.Location.X + 25,
+                spawnY: playerSprite.Location.Y);
+            if (playerSprite.Name == "Player_2")
+            {
+                bullet.SetName("Player_2_Bullet");
+                bullet2.SetName("Player_2_Bullet");
+            }
+            if (playerSprite.Name == "Player_1")
+            {
+                bullet.SetName("Player_1_Bullet");
+                bullet2.SetName("Player_1_Bullet");
+            }
+            bullets.Add(bullet);
+            bullets.Add(bullet2);
+        }
+        protected virtual void SetPlayerSprite()
+        {
+            playerSprite.Size = new System.Drawing.Size(32, 32);
+            parent.Controls.Add(playerSprite);
+            playerSprite.Show();
+            playerSprite.Location = new System.Drawing.Point(spawnX, spawnY);
+            playerSprite.BackColor = System.Drawing.Color.Transparent;
+        }
         public virtual void CheckCollision()
         {
-            if (playerSprite.IsDisposed)
+            if (IsWasted())
             {
                 DestroySelf();
             }
-            //foreach(Control control in parent.Controls)
-            //{
-            //    if(control.Name == "Laser")
-            //    {
-            //        if(control.Bounds.IntersectsWith(playerSprite.Bounds))
-            //        {
-            //            shootsLaser = true;
-            //        }
-            //    }
-            //}
+            else
+            {
+                foreach (Control control in parent.Controls)
+                {
+                    if (control.Name == "ENEMY_1" || control.Name == "ENEMY_2")
+                    {
+                        if (control.Bounds.IntersectsWith(playerSprite.Bounds))
+                        {
+                            control.Dispose();
+                            playerHealth -= 50;
+                        }
+                    }
+                    if(control.Name == "Laser")
+                    {
+                        if(control.Bounds.IntersectsWith(playerSprite.Bounds))
+                        {
+                            control.Dispose();
+                            if(shootingMode == SHOOTING_MODE.SINGLE)
+                            {
+                                shootingMode = SHOOTING_MODE.DOUBLE;
+                            }
+                            else if(shootingMode == SHOOTING_MODE.DOUBLE)
+                            {
+                                shootingMode = SHOOTING_MODE.TRIPLE;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public void CheckPvPCollision()
+        {
+            if (IsWasted())
+            {
+                DestroySelf();
+            }
+            else
+            {
+                foreach (Control control in parent.Controls)
+                {
+                    if (control.Name == "Player_2_Bullet")
+                    {
+                        if (control.Bounds.IntersectsWith(playerSprite.Bounds) && playerSprite.Name == "Player_1")
+                        {
+                            control.Dispose();
+                            playerHealth -= 20;
+                        }
+                    }
+                    if (control.Name == "Player_1_Bullet")
+                    {
+                        if (control.Bounds.IntersectsWith(playerSprite.Bounds) && playerSprite.Name == "Player_2")
+                        {
+                            control.Dispose();
+                            playerHealth -= 20;
+                        }
+                    }
+                }
+            }
         }
         public virtual void DestroySelf()
         {
@@ -56,23 +182,26 @@ namespace VP_Project.Model.Player
 
         public virtual bool IsWasted()
         {
-            return playerDead;
+            return playerHealth <= 0;
         }
         public void MoveForward()
         {
+            if(playerSprite.Location.Y >= 20)
                 playerSprite.Top -= SPEED;
         }
         public void MoveBackward()
         {
-
+            if(playerSprite.Location.Y <= 530)
                 playerSprite.Top += SPEED;
         }
         public void MoveLeft()
         {
+            if (playerSprite.Location.X >= 30)
                 playerSprite.Left -= SPEED;
         }
         public void MoveRight()
         {
+            if(playerSprite.Location.X <= 750)
                 playerSprite.Left += SPEED;
         }
 

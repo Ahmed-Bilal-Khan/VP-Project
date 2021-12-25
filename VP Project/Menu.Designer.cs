@@ -158,7 +158,7 @@ namespace VP_Project
             this.BoundaryTop.BackColor = System.Drawing.Color.Transparent;
             this.BoundaryTop.Location = new System.Drawing.Point(0, 0);
             this.BoundaryTop.Name = "BoundaryTop";
-            this.BoundaryTop.Size = new System.Drawing.Size(787, 10);
+            this.BoundaryTop.Size = new System.Drawing.Size(787, 20);
             this.BoundaryTop.TabIndex = 5;
             // 
             // BoundaryBottom

@@ -30,17 +30,18 @@ namespace VP_Project.Model.Player
                         DestroySelf();
                     }
                 }
-                if(control.Name == "Player")
-                {
-                    if(playerSprite != null)
-                    if(playerSprite.Bounds.IntersectsWith(control.Bounds))
-                    {
-                        control.Dispose();
-                        DestroySelf();
-                    }
-                }
+                //if(control.Name == "Player")
+                //{
+                //    if(playerSprite != null)
+                //    if(playerSprite.Bounds.IntersectsWith(control.Bounds))
+                //    {
+                //        control.Dispose();
+                //        DestroySelf();
+                //    }
+                //}
             }
         }
+
         public override void DestroySelf()
         {
             //playerSprite.Location = new System.Drawing.Point(playerSprite.Location.X, 580);
@@ -78,6 +79,7 @@ namespace VP_Project.Model.Player
             playerSprite.Show();
             playerSprite.Location = new System.Drawing.Point(spawnX, spawnY);
             playerSprite.BackColor = System.Drawing.Color.Transparent;
+            playerSprite.Image.RotateFlip(System.Drawing.RotateFlipType.RotateNoneFlipY);
         }
     }
 }
