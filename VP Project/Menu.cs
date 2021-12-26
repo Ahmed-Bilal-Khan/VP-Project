@@ -223,7 +223,7 @@ namespace VP_Project
         private void button1_MouseHover(object sender, EventArgs e)
         {
             button1.BackColor = Color.Black;
-            button1.Text = "Start";
+            button1.Text = "START";
             button1.ForeColor = Color.Silver;
 
         }
@@ -231,21 +231,21 @@ namespace VP_Project
         private void button2_MouseHover(object sender, EventArgs e)
         {
             button2.BackColor = Color.Black;
-            button2.Text = "Start";
+            button2.Text = "OPEN";
             button2.ForeColor = Color.Silver;
         }
 
         private void button3_MouseHover(object sender, EventArgs e)
         {
             button3.BackColor = Color.Black;
-            button3.Text = "Start";
+            button3.Text = "START";
             button3.ForeColor = Color.Silver;
         }
 
         private void button1_MouseLeave(object sender, EventArgs e)
         {
             button1.BackColor = Color.Silver;
-            button1.Text = "Endless Mode";
+            button1.Text = "ENDLESS MODE";
             button1.ForeColor = Color.Black;
 
         }
@@ -253,7 +253,7 @@ namespace VP_Project
         private void button2_MouseLeave(object sender, EventArgs e)
         {
             button2.BackColor = Color.Silver;
-            button2.Text = "Scores";
+            button2.Text = "SCORES";
             button2.ForeColor = Color.Black;
 
         }
@@ -261,7 +261,7 @@ namespace VP_Project
         private void button3_MouseLeave(object sender, EventArgs e)
         {
             button3.BackColor = Color.Silver;
-            button3.Text = "PvP Mode";
+            button3.Text = "PvP MODE";
             button3.ForeColor = Color.Black;
 
         }
@@ -492,84 +492,84 @@ namespace VP_Project
         private void BtnPVPStart_MouseHover(object sender, EventArgs e)
         {
             BtnPVPStart.BackColor = Color.Black;
-            BtnPVPStart.Text = "Start";
+            BtnPVPStart.Text = "START";
             BtnPVPStart.ForeColor = Color.Silver;
         }
 
         private void BtnPVPStart_MouseLeave(object sender, EventArgs e)
         {
             BtnPVPStart.BackColor = Color.Silver;
-            BtnPVPStart.Text = "Start";
+            BtnPVPStart.Text = "START";
             BtnPVPStart.ForeColor = Color.Black;
         }
 
         private void button6_MouseHover(object sender, EventArgs e)
         {
             button6.BackColor = Color.Black;
-            button6.Text = "Go Back";
+            button6.Text = "BACK";
             button6.ForeColor = Color.Silver;
         }
 
         private void button6_MouseLeave(object sender, EventArgs e)
         {
             button6.BackColor = Color.Silver;
-            button6.Text = "Go Back";
+            button6.Text = "BACK";
             button6.ForeColor = Color.Black;
         }
 
         private void button4_MouseHover(object sender, EventArgs e)
         {
             button4.BackColor = Color.Black;
-            button4.Text = "Return to Menu";
+            button4.Text = "RETURN TO MENU";
             button4.ForeColor = Color.Silver;
         }
 
         private void button4_MouseLeave(object sender, EventArgs e)
         {
             button4.BackColor = Color.Silver;
-            button4.Text = "Return to Menu";
+            button4.Text = "RETURN TO MENU";
             button4.ForeColor = Color.Black;
         }
 
         private void BtnStart_MouseHover(object sender, EventArgs e)
         {
             BtnStart.BackColor = Color.Black;
-            BtnStart.Text = "Start";
+            BtnStart.Text = "START";
             BtnStart.ForeColor = Color.Silver;
         }
 
         private void BtnStart_MouseLeave(object sender, EventArgs e)
         {
             BtnStart.BackColor = Color.Silver;
-            BtnStart.Text = "Start";
+            BtnStart.Text = "START";
             BtnStart.ForeColor = Color.Black;
         }
 
         private void BtnBack_MouseHover(object sender, EventArgs e)
         {
             BtnBack.BackColor = Color.Black;
-            BtnBack.Text = "Go Back";
+            BtnBack.Text = "BACK";
             BtnBack.ForeColor = Color.Silver;
         }
 
         private void BtnBack_MouseLeave(object sender, EventArgs e)
         {
             BtnBack.BackColor = Color.Silver;
-            BtnBack.Text = "Go Back";
+            BtnBack.Text = "BACK";
             BtnBack.ForeColor = Color.Black;
         }
 
         private void BtnBackToMenu_MouseHover(object sender, EventArgs e)
         {
             BtnBackToMenu.BackColor = Color.Black;
-            BtnBackToMenu.Text = "Exit";
+            BtnBackToMenu.Text = "EXIT";
             BtnBackToMenu.ForeColor = Color.Silver;
         }
 
         private void BtnBackToMenu_MouseLeave(object sender, EventArgs e)
         {
             BtnBackToMenu.BackColor = Color.Silver;
-            BtnBackToMenu.Text = "Exit";
+            BtnBackToMenu.Text = "EXIT";
             BtnBackToMenu.ForeColor = Color.Black;
         }
     }

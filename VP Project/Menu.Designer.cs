@@ -81,26 +81,26 @@ namespace VP_Project
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Franchise", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI Black", 50F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Silver;
-            this.label1.Location = new System.Drawing.Point(137, 79);
+            this.label1.Location = new System.Drawing.Point(68, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(487, 69);
+            this.label1.Size = new System.Drawing.Size(648, 89);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Starship Battle";
+            this.label1.Text = "STARSHIP BATTLE";
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Silver;
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.button1.Font = new System.Drawing.Font("Franchise", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Font = new System.Drawing.Font("Segoe UI Black", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button1.Location = new System.Drawing.Point(293, 174);
+            this.button1.Location = new System.Drawing.Point(249, 174);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(196, 69);
+            this.button1.Size = new System.Drawing.Size(286, 69);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Endless Mode";
+            this.button1.Text = "ENDLESS MODE";
             this.button1.UseCompatibleTextRendering = true;
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -112,10 +112,10 @@ namespace VP_Project
             this.button2.BackColor = System.Drawing.Color.Silver;
             this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.button2.Font = new System.Drawing.Font("Franchise", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(293, 249);
+            this.button2.Font = new System.Drawing.Font("Segoe UI Black", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(249, 265);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(196, 69);
+            this.button2.Size = new System.Drawing.Size(286, 69);
             this.button2.TabIndex = 2;
             this.button2.Text = "SCORES";
             this.button2.UseVisualStyleBackColor = false;
@@ -128,12 +128,12 @@ namespace VP_Project
             this.button3.BackColor = System.Drawing.Color.Silver;
             this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.button3.Font = new System.Drawing.Font("Franchise", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(293, 324);
+            this.button3.Font = new System.Drawing.Font("Segoe UI Black", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(249, 358);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(196, 69);
+            this.button3.Size = new System.Drawing.Size(286, 69);
             this.button3.TabIndex = 3;
-            this.button3.Text = "PvP Mode";
+            this.button3.Text = "PvP MODE";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             this.button3.MouseLeave += new System.EventHandler(this.button3_MouseLeave);
@@ -193,12 +193,12 @@ namespace VP_Project
             this.BtnStart.BackColor = System.Drawing.Color.Silver;
             this.BtnStart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.BtnStart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.BtnStart.Font = new System.Drawing.Font("Franchise", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnStart.Location = new System.Drawing.Point(270, 253);
+            this.BtnStart.Font = new System.Drawing.Font("Segoe UI Black", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnStart.Location = new System.Drawing.Point(270, 278);
             this.BtnStart.Name = "BtnStart";
-            this.BtnStart.Size = new System.Drawing.Size(215, 69);
+            this.BtnStart.Size = new System.Drawing.Size(230, 69);
             this.BtnStart.TabIndex = 8;
-            this.BtnStart.Text = "Start";
+            this.BtnStart.Text = "START";
             this.BtnStart.UseVisualStyleBackColor = false;
             this.BtnStart.Click += new System.EventHandler(this.BtnStart_Click);
             this.BtnStart.MouseLeave += new System.EventHandler(this.BtnStart_MouseLeave);
@@ -209,7 +209,7 @@ namespace VP_Project
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(491, 144);
+            this.pictureBox2.Location = new System.Drawing.Point(506, 169);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(51, 76);
             this.pictureBox2.TabIndex = 7;
@@ -221,7 +221,7 @@ namespace VP_Project
             this.BtnPlaneBack.BackColor = System.Drawing.Color.Transparent;
             this.BtnPlaneBack.BackgroundImage = global::VP_Project.Properties.Resources.btn_left1;
             this.BtnPlaneBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnPlaneBack.Location = new System.Drawing.Point(213, 144);
+            this.BtnPlaneBack.Location = new System.Drawing.Point(213, 168);
             this.BtnPlaneBack.Name = "BtnPlaneBack";
             this.BtnPlaneBack.Size = new System.Drawing.Size(51, 76);
             this.BtnPlaneBack.TabIndex = 6;
@@ -232,9 +232,9 @@ namespace VP_Project
             // 
             this.PlaneSelectBox.BackgroundImage = global::VP_Project.Properties.Resources.plane_red;
             this.PlaneSelectBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.PlaneSelectBox.Location = new System.Drawing.Point(271, 146);
+            this.PlaneSelectBox.Location = new System.Drawing.Point(271, 171);
             this.PlaneSelectBox.Name = "PlaneSelectBox";
-            this.PlaneSelectBox.Size = new System.Drawing.Size(215, 73);
+            this.PlaneSelectBox.Size = new System.Drawing.Size(229, 73);
             this.PlaneSelectBox.TabIndex = 4;
             this.PlaneSelectBox.TabStop = false;
             // 
@@ -243,12 +243,12 @@ namespace VP_Project
             this.BtnBack.BackColor = System.Drawing.Color.Silver;
             this.BtnBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.BtnBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.BtnBack.Font = new System.Drawing.Font("Franchise", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnBack.Location = new System.Drawing.Point(270, 342);
+            this.BtnBack.Font = new System.Drawing.Font("Segoe UI Black", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnBack.Location = new System.Drawing.Point(270, 367);
             this.BtnBack.Name = "BtnBack";
-            this.BtnBack.Size = new System.Drawing.Size(215, 69);
+            this.BtnBack.Size = new System.Drawing.Size(230, 69);
             this.BtnBack.TabIndex = 3;
-            this.BtnBack.Text = "Go Back";
+            this.BtnBack.Text = "BACK";
             this.BtnBack.UseVisualStyleBackColor = false;
             this.BtnBack.Click += new System.EventHandler(this.BtnBack_Click);
             this.BtnBack.MouseLeave += new System.EventHandler(this.BtnBack_MouseLeave);
@@ -258,11 +258,11 @@ namespace VP_Project
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Franchise", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI Black", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Silver;
-            this.label2.Location = new System.Drawing.Point(251, 61);
+            this.label2.Location = new System.Drawing.Point(195, 37);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(252, 69);
+            this.label2.Size = new System.Drawing.Size(394, 106);
             this.label2.TabIndex = 0;
             this.label2.Text = "ENDLESS";
             // 
@@ -280,10 +280,10 @@ namespace VP_Project
             // 
             // textBox1
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F);
-            this.textBox1.Location = new System.Drawing.Point(235, 213);
+            this.textBox1.Font = new System.Drawing.Font("Segoe UI Black", 21.75F);
+            this.textBox1.Location = new System.Drawing.Point(190, 210);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(285, 40);
+            this.textBox1.Size = new System.Drawing.Size(407, 47);
             this.textBox1.TabIndex = 9;
             // 
             // button4
@@ -291,12 +291,12 @@ namespace VP_Project
             this.button4.BackColor = System.Drawing.Color.Silver;
             this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.button4.Font = new System.Drawing.Font("Franchise", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(235, 273);
+            this.button4.Font = new System.Drawing.Font("Segoe UI Black", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(190, 295);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(285, 69);
+            this.button4.Size = new System.Drawing.Size(407, 69);
             this.button4.TabIndex = 8;
-            this.button4.Text = "Return to Menu";
+            this.button4.Text = "RETURN TO MENU";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             this.button4.MouseLeave += new System.EventHandler(this.button4_MouseLeave);
@@ -306,11 +306,11 @@ namespace VP_Project
             // 
             this.GameOverText.AutoSize = true;
             this.GameOverText.BackColor = System.Drawing.Color.Transparent;
-            this.GameOverText.Font = new System.Drawing.Font("Franchise", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GameOverText.Font = new System.Drawing.Font("Segoe UI Black", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GameOverText.ForeColor = System.Drawing.Color.Silver;
-            this.GameOverText.Location = new System.Drawing.Point(223, 131);
+            this.GameOverText.Location = new System.Drawing.Point(131, 77);
             this.GameOverText.Name = "GameOverText";
-            this.GameOverText.Size = new System.Drawing.Size(310, 69);
+            this.GameOverText.Size = new System.Drawing.Size(524, 106);
             this.GameOverText.TabIndex = 0;
             this.GameOverText.Text = "GAME OVER";
             // 
@@ -337,7 +337,7 @@ namespace VP_Project
             this.BtnP2Next.BackColor = System.Drawing.Color.Transparent;
             this.BtnP2Next.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnP2Next.BackgroundImage")));
             this.BtnP2Next.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnP2Next.Location = new System.Drawing.Point(488, 204);
+            this.BtnP2Next.Location = new System.Drawing.Point(503, 221);
             this.BtnP2Next.Name = "BtnP2Next";
             this.BtnP2Next.Size = new System.Drawing.Size(51, 76);
             this.BtnP2Next.TabIndex = 11;
@@ -349,7 +349,7 @@ namespace VP_Project
             this.BtnP2Back.BackColor = System.Drawing.Color.Transparent;
             this.BtnP2Back.BackgroundImage = global::VP_Project.Properties.Resources.btn_left1;
             this.BtnP2Back.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnP2Back.Location = new System.Drawing.Point(210, 207);
+            this.BtnP2Back.Location = new System.Drawing.Point(228, 223);
             this.BtnP2Back.Name = "BtnP2Back";
             this.BtnP2Back.Size = new System.Drawing.Size(51, 76);
             this.BtnP2Back.TabIndex = 10;
@@ -360,7 +360,7 @@ namespace VP_Project
             // 
             this.P2Select.BackgroundImage = global::VP_Project.Properties.Resources.plane_red;
             this.P2Select.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.P2Select.Location = new System.Drawing.Point(268, 208);
+            this.P2Select.Location = new System.Drawing.Point(285, 226);
             this.P2Select.Name = "P2Select";
             this.P2Select.Size = new System.Drawing.Size(215, 73);
             this.P2Select.TabIndex = 9;
@@ -371,12 +371,12 @@ namespace VP_Project
             this.BtnPVPStart.BackColor = System.Drawing.Color.Silver;
             this.BtnPVPStart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.BtnPVPStart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.BtnPVPStart.Font = new System.Drawing.Font("Franchise", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnPVPStart.Location = new System.Drawing.Point(268, 293);
+            this.BtnPVPStart.Font = new System.Drawing.Font("Segoe UI Black", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnPVPStart.Location = new System.Drawing.Point(285, 314);
             this.BtnPVPStart.Name = "BtnPVPStart";
             this.BtnPVPStart.Size = new System.Drawing.Size(213, 69);
             this.BtnPVPStart.TabIndex = 8;
-            this.BtnPVPStart.Text = "Start";
+            this.BtnPVPStart.Text = "START";
             this.BtnPVPStart.UseVisualStyleBackColor = false;
             this.BtnPVPStart.Click += new System.EventHandler(this.BtnPVPStart_Click);
             this.BtnPVPStart.MouseLeave += new System.EventHandler(this.BtnPVPStart_MouseLeave);
@@ -387,7 +387,7 @@ namespace VP_Project
             this.BtnP1Next.BackColor = System.Drawing.Color.Transparent;
             this.BtnP1Next.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnP1Next.BackgroundImage")));
             this.BtnP1Next.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnP1Next.Location = new System.Drawing.Point(488, 122);
+            this.BtnP1Next.Location = new System.Drawing.Point(506, 137);
             this.BtnP1Next.Name = "BtnP1Next";
             this.BtnP1Next.Size = new System.Drawing.Size(51, 76);
             this.BtnP1Next.TabIndex = 7;
@@ -399,7 +399,7 @@ namespace VP_Project
             this.BtnP1Back.BackColor = System.Drawing.Color.Transparent;
             this.BtnP1Back.BackgroundImage = global::VP_Project.Properties.Resources.btn_left1;
             this.BtnP1Back.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnP1Back.Location = new System.Drawing.Point(210, 122);
+            this.BtnP1Back.Location = new System.Drawing.Point(228, 137);
             this.BtnP1Back.Name = "BtnP1Back";
             this.BtnP1Back.Size = new System.Drawing.Size(51, 76);
             this.BtnP1Back.TabIndex = 6;
@@ -410,7 +410,7 @@ namespace VP_Project
             // 
             this.P1Select.BackgroundImage = global::VP_Project.Properties.Resources.plane_red;
             this.P1Select.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.P1Select.Location = new System.Drawing.Point(268, 124);
+            this.P1Select.Location = new System.Drawing.Point(285, 140);
             this.P1Select.Name = "P1Select";
             this.P1Select.Size = new System.Drawing.Size(215, 73);
             this.P1Select.TabIndex = 4;
@@ -421,12 +421,12 @@ namespace VP_Project
             this.button6.BackColor = System.Drawing.Color.Silver;
             this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.button6.Font = new System.Drawing.Font("Franchise", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(268, 367);
+            this.button6.Font = new System.Drawing.Font("Segoe UI Black", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.Location = new System.Drawing.Point(287, 389);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(213, 64);
             this.button6.TabIndex = 3;
-            this.button6.Text = "Go Back";
+            this.button6.Text = "BACK";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             this.button6.MouseLeave += new System.EventHandler(this.button6_MouseLeave);
@@ -436,11 +436,11 @@ namespace VP_Project
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Franchise", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Segoe UI Black", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Silver;
-            this.label4.Location = new System.Drawing.Point(234, 41);
+            this.label4.Location = new System.Drawing.Point(161, 14);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(280, 69);
+            this.label4.Size = new System.Drawing.Size(463, 106);
             this.label4.TabIndex = 0;
             this.label4.Text = "PvP MODE";
             // 
@@ -459,12 +459,12 @@ namespace VP_Project
             // 
             // BtnBackToMenu
             // 
-            this.BtnBackToMenu.Font = new System.Drawing.Font("Franchise", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnBackToMenu.Location = new System.Drawing.Point(708, 501);
+            this.BtnBackToMenu.Font = new System.Drawing.Font("Segoe UI Black", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnBackToMenu.Location = new System.Drawing.Point(669, 501);
             this.BtnBackToMenu.Name = "BtnBackToMenu";
-            this.BtnBackToMenu.Size = new System.Drawing.Size(64, 45);
+            this.BtnBackToMenu.Size = new System.Drawing.Size(103, 45);
             this.BtnBackToMenu.TabIndex = 12;
-            this.BtnBackToMenu.Text = "Exit";
+            this.BtnBackToMenu.Text = "EXIT";
             this.BtnBackToMenu.UseVisualStyleBackColor = true;
             this.BtnBackToMenu.Click += new System.EventHandler(this.BtnBackToMenu_Click);
             this.BtnBackToMenu.MouseLeave += new System.EventHandler(this.BtnBackToMenu_MouseLeave);
@@ -478,10 +478,10 @@ namespace VP_Project
             this.BackgroundImage = global::VP_Project.Properties.Resources._1268183;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.ControlBox = false;
-            this.Controls.Add(this.MENU_ENDLESS);
             this.Controls.Add(this.MenuGameOver);
-            this.Controls.Add(this.MenuPVP);
+            this.Controls.Add(this.MENU_ENDLESS);
             this.Controls.Add(this.MenuHolder);
+            this.Controls.Add(this.MenuPVP);
             this.Controls.Add(this.BtnBackToMenu);
             this.Controls.Add(this.ScoresBox);
             this.Controls.Add(this.BoundaryBottom);
