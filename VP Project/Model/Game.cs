@@ -240,27 +240,27 @@ namespace VP_Project.Model.Game
             scoreLabel.Location = new System.Drawing.Point(4, 17);
             scoreLabel.Size = new System.Drawing.Size(150, 24);
             scoreLabel.ForeColor = System.Drawing.Color.Silver;
-            scoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16);
+            scoreLabel.Font = new System.Drawing.Font("Segoe UI Black", 16);
             scoreLabel.Show();
             scoreLabel.BackColor = System.Drawing.Color.Transparent;
 
             healthLabel = new Label();
-            healthLabel.Text = ($"Health: {player.PlayerHealth}");
+            healthLabel.Text = ($"HEALTH: {player.PlayerHealth}");
             healthLabel.Parent = parent;
             healthLabel.Location = new System.Drawing.Point(4, 500);
             healthLabel.Size = new System.Drawing.Size(150, 24);
             healthLabel.ForeColor = System.Drawing.Color.Silver;
-            healthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16);
+            healthLabel.Font = new System.Drawing.Font("Segoe UI Black", 13);
             healthLabel.Show();
             healthLabel.BackColor = System.Drawing.Color.Transparent;
 
             timeLabel = new Label();
-            timeLabel.Text = ($"Time: {countdown}");
+            timeLabel.Text = ($"TIME: {countdown}");
             timeLabel.Parent = parent;
             timeLabel.Location = new System.Drawing.Point(650, 17);
             timeLabel.Size = new System.Drawing.Size(150, 24);
             timeLabel.ForeColor = System.Drawing.Color.Silver;
-            timeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16);
+            timeLabel.Font = new System.Drawing.Font("Segoe UI Black", 13);
             timeLabel.Show();
             timeLabel.BackColor = System.Drawing.Color.Transparent;
         }
@@ -461,7 +461,7 @@ namespace VP_Project.Model.Game
             scoreLabel.Location = new System.Drawing.Point(4, 17);
             scoreLabel.Size = new System.Drawing.Size(150, 24);
             scoreLabel.ForeColor = System.Drawing.Color.Silver;
-            scoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16);
+            scoreLabel.Font = new System.Drawing.Font("Segoe UI Black", 13);
             scoreLabel.Show();
             scoreLabel.BackColor = System.Drawing.Color.Transparent;
 
@@ -471,7 +471,7 @@ namespace VP_Project.Model.Game
             healthLabel.Location = new System.Drawing.Point(4, 500);
             healthLabel.Size = new System.Drawing.Size(150, 24);
             healthLabel.ForeColor = System.Drawing.Color.Silver;
-            healthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16);
+            healthLabel.Font = new System.Drawing.Font("Segoe UI Black", 13);
             healthLabel.Show();
             healthLabel.BackColor = System.Drawing.Color.Transparent;
         }
