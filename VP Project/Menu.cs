@@ -80,11 +80,27 @@ namespace VP_Project
                     game.UpdatePvP();
                 }
             }
-            if(state == GAME_STATE.GAME_END)
+            if(state == GAME_STATE.GAME_END && Game.Type == GAME_TYPE.PVP)
+            {
+                if (game.P1_won)
+                {
+                    MenuGameOver.Visible = true;
+                    textBox1.Visible = false;
+                    GameOverText.Text = "Player 1 Wins";
+                }
+                if (game.P2_won)
+                {
+                    MenuGameOver.Visible = true;
+                    textBox1.Visible = false;
+                    GameOverText.Text = "Player 2 Wins";
+                }
+            }
+            if(state == GAME_STATE.GAME_END && Game.Type == GAME_TYPE.ENDLESS)
             {
                 MenuGameOver.Visible = true;
+                textBox1.Visible = true;
+                GameOverText.Text = "GAME OVER";
             }
-                
         }
 
         private void Menu_KeyDown(object sender, KeyEventArgs e)

@@ -35,6 +35,9 @@ namespace VP_Project.Model.Game
         private Boolean p2_downPressed;
         private Boolean p2_shootPressed;
 
+        private Boolean p1_won;
+        private Boolean p2_won;
+
         // Misc
         static Boolean pickupExists;
         Random r = new Random();
@@ -71,6 +74,8 @@ namespace VP_Project.Model.Game
         public bool P2_shootPressed { get => p2_shootPressed; set => p2_shootPressed = value; }
         public static int Countdown { get => countdown; }
         public static int SCORE1 { get => SCORE; }
+        public bool P2_won { get => p2_won; }
+        public bool P1_won { get => p1_won; }
 
         public void CheckInput()
         {
@@ -282,14 +287,14 @@ namespace VP_Project.Model.Game
             if(player != null)
             {
                 AddEnemy();
-                if(SCORE == 3 && appearCount == 0)
+                if(SCORE == 50 && appearCount == 0)
                 {
                     SpawnLaser();
                     timeSinceAppearance = 9;
                     pickupExists = true;
                     appearCount++;
                 }
-                if(SCORE == 5 && appearCount == 1)
+                if(SCORE == 100 && appearCount == 1)
                 {
                     SpawnLaser();
                     timeSinceAppearance = 9;
@@ -370,11 +375,16 @@ namespace VP_Project.Model.Game
         {
             Menu.state = GAME_STATE.GAME_END;
             player.DestroySelf();
-            player = null;
-            foreach(Player.Enemy enemy in enemies)
+            if(player2 != null)
             {
-                enemy.DestroySelf();
+                player2.DestroySelf();
             }
+            //player = null;
+            if(enemies != null)
+                foreach(Player.Enemy enemy in enemies)
+                {
+                    enemy.DestroySelf();
+                }
             GC.Collect();
         }
 
@@ -382,12 +392,16 @@ namespace VP_Project.Model.Game
         {
             scoreLabel.Dispose();
             SCORE = 0;
-            timer.Dispose();
-            enemies.Clear();
+            if(timer != null)
+                timer.Dispose();
+            if(enemies != null)
+                enemies.Clear();
             if(laserBox != null)
                 laserBox.Dispose();
-            timeLabel.Dispose();
-            healthLabel.Dispose();
+            if(timeLabel != null)
+                timeLabel.Dispose();
+            if(healthLabel != null)
+                healthLabel.Dispose();
         }
 
         private void Create_PvP()
@@ -467,25 +481,24 @@ namespace VP_Project.Model.Game
                 player2.CheckPvPCollision();
                 healthLabel.Text = ($"Health: {player.PlayerHealth}");
                 scoreLabel.Text = ($"Health: {player2.PlayerHealth}");
-                
+                CheckPvPWin();
             }
-            if (player.IsWasted())
-            {
-                timer.Stop();
-                timer.Enabled = false;
-                timer = new Timer();
-            }
+            
         }
 
         private void CheckPvPWin()
         {
             if(player.PlayerHealth <= 0)
             {
-
+                p2_won = true;
+                Menu.state = GAME_STATE.GAME_END;
+                DestroyGame();
             }
             if(player2.PlayerHealth <= 0)
             {
-
+                p1_won = true;
+                Menu.state = GAME_STATE.GAME_END;
+                DestroyGame();
             }
         }
     }

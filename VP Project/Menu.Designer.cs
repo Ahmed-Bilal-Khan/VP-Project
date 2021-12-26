@@ -49,7 +49,7 @@ namespace VP_Project
             this.MenuGameOver = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.GameOverText = new System.Windows.Forms.Label();
             this.MenuPVP = new System.Windows.Forms.Panel();
             this.BtnP2Next = new System.Windows.Forms.PictureBox();
             this.BtnP2Back = new System.Windows.Forms.PictureBox();
@@ -266,8 +266,8 @@ namespace VP_Project
             this.MenuGameOver.BackColor = System.Drawing.Color.Transparent;
             this.MenuGameOver.Controls.Add(this.textBox1);
             this.MenuGameOver.Controls.Add(this.button4);
-            this.MenuGameOver.Controls.Add(this.label3);
-            this.MenuGameOver.Location = new System.Drawing.Point(114, 29);
+            this.MenuGameOver.Controls.Add(this.GameOverText);
+            this.MenuGameOver.Location = new System.Drawing.Point(101, 23);
             this.MenuGameOver.Name = "MenuGameOver";
             this.MenuGameOver.Size = new System.Drawing.Size(566, 475);
             this.MenuGameOver.TabIndex = 9;
@@ -295,17 +295,17 @@ namespace VP_Project
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // label3
+            // GameOverText
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.Color.Silver;
-            this.label3.Location = new System.Drawing.Point(23, 22);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(521, 91);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "GAME OVER";
+            this.GameOverText.AutoSize = true;
+            this.GameOverText.BackColor = System.Drawing.Color.Transparent;
+            this.GameOverText.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.GameOverText.ForeColor = System.Drawing.Color.Silver;
+            this.GameOverText.Location = new System.Drawing.Point(23, 22);
+            this.GameOverText.Name = "GameOverText";
+            this.GameOverText.Size = new System.Drawing.Size(521, 91);
+            this.GameOverText.TabIndex = 0;
+            this.GameOverText.Text = "GAME OVER";
             // 
             // MenuPVP
             // 
@@ -520,7 +520,7 @@ namespace VP_Project
         private System.Windows.Forms.Button BtnStart;
         private System.Windows.Forms.Panel MenuGameOver;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label GameOverText;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Panel MenuPVP;
         private System.Windows.Forms.PictureBox BtnP2Next;
