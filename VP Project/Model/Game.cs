@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Collections.Generic;
 using Timer = System.Windows.Forms.Timer;
+using System.Media;
 
 namespace VP_Project.Model.Game 
 {
@@ -38,9 +39,12 @@ namespace VP_Project.Model.Game
         private Boolean p1_won;
         private Boolean p2_won;
 
+
         // Misc
         static Boolean pickupExists;
         Random r = new Random();
+
+        public static SoundPlayer soundPlayer = new SoundPlayer();
 
         public Game(GAME_TYPE type, Control parent)
         {
@@ -373,6 +377,10 @@ namespace VP_Project.Model.Game
 
         private void DestroyGame()
         {
+            System.IO.Stream pew_pew = Properties.Resources.oh_no;
+            soundPlayer = new System.Media.SoundPlayer(pew_pew);
+            soundPlayer.Play();
+
             Menu.state = GAME_STATE.GAME_END;
             player.DestroySelf();
             if(player2 != null)

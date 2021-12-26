@@ -139,6 +139,10 @@ namespace VP_Project.Model.Player
                         {
                             control.Dispose();
                             playerHealth -= 50;
+
+                            System.IO.Stream oof = Properties.Resources.oof;
+                            Game.Game.soundPlayer = new System.Media.SoundPlayer(oof);
+                            Game.Game.soundPlayer.Play();
                         }
                     }
                     if (control.Name == "Laser")
@@ -176,6 +180,10 @@ namespace VP_Project.Model.Player
                         {
                             control.Dispose();
                             playerHealth -= 20;
+
+                            System.IO.Stream oof = Properties.Resources.oof;
+                            Game.Game.soundPlayer = new System.Media.SoundPlayer(oof);
+                            Game.Game.soundPlayer.Play();
                         }
                     }
                     if (control.Name == "Player_1_Bullet")
@@ -184,6 +192,10 @@ namespace VP_Project.Model.Player
                         {
                             control.Dispose();
                             playerHealth -= 20;
+
+                            System.IO.Stream oof_2 = Properties.Resources.oof_2;
+                            Game.Game.soundPlayer = new System.Media.SoundPlayer(oof_2);
+                            Game.Game.soundPlayer.Play();
                         }
                     }
                 }

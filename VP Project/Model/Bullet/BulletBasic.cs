@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-using System;
 namespace VP_Project.Model.Bullet
 {
     internal class BulletBasic : Bullet
@@ -22,6 +21,10 @@ namespace VP_Project.Model.Bullet
                 tries = 1;
             }
             CreateBullet();
+
+            System.IO.Stream pew_pew = Properties.Resources.pew_pew;
+            Game.Game.soundPlayer = new System.Media.SoundPlayer(pew_pew);
+            Game.Game.soundPlayer.Play();
         }
 
         protected override void CreateBullet()
