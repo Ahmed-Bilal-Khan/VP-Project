@@ -201,6 +201,8 @@ namespace VP_Project
             this.BtnStart.Text = "Start";
             this.BtnStart.UseVisualStyleBackColor = false;
             this.BtnStart.Click += new System.EventHandler(this.BtnStart_Click);
+            this.BtnStart.MouseLeave += new System.EventHandler(this.BtnStart_MouseLeave);
+            this.BtnStart.MouseHover += new System.EventHandler(this.BtnStart_MouseHover);
             // 
             // pictureBox2
             // 
@@ -249,6 +251,8 @@ namespace VP_Project
             this.BtnBack.Text = "Go Back";
             this.BtnBack.UseVisualStyleBackColor = false;
             this.BtnBack.Click += new System.EventHandler(this.BtnBack_Click);
+            this.BtnBack.MouseLeave += new System.EventHandler(this.BtnBack_MouseLeave);
+            this.BtnBack.MouseHover += new System.EventHandler(this.BtnBack_MouseHover);
             // 
             // label2
             // 
@@ -295,6 +299,8 @@ namespace VP_Project
             this.button4.Text = "Return to Menu";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.MouseLeave += new System.EventHandler(this.button4_MouseLeave);
+            this.button4.MouseHover += new System.EventHandler(this.button4_MouseHover);
             // 
             // GameOverText
             // 
@@ -373,6 +379,8 @@ namespace VP_Project
             this.BtnPVPStart.Text = "Start";
             this.BtnPVPStart.UseVisualStyleBackColor = false;
             this.BtnPVPStart.Click += new System.EventHandler(this.BtnPVPStart_Click);
+            this.BtnPVPStart.MouseLeave += new System.EventHandler(this.BtnPVPStart_MouseLeave);
+            this.BtnPVPStart.MouseHover += new System.EventHandler(this.BtnPVPStart_MouseHover);
             // 
             // BtnP1Next
             // 
@@ -421,6 +429,8 @@ namespace VP_Project
             this.button6.Text = "Go Back";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button6.MouseLeave += new System.EventHandler(this.button6_MouseLeave);
+            this.button6.MouseHover += new System.EventHandler(this.button6_MouseHover);
             // 
             // label4
             // 
@@ -457,6 +467,8 @@ namespace VP_Project
             this.BtnBackToMenu.Text = "Exit";
             this.BtnBackToMenu.UseVisualStyleBackColor = true;
             this.BtnBackToMenu.Click += new System.EventHandler(this.BtnBackToMenu_Click);
+            this.BtnBackToMenu.MouseLeave += new System.EventHandler(this.BtnBackToMenu_MouseLeave);
+            this.BtnBackToMenu.MouseHover += new System.EventHandler(this.BtnBackToMenu_MouseHover);
             // 
             // Menu
             // 
@@ -466,10 +478,10 @@ namespace VP_Project
             this.BackgroundImage = global::VP_Project.Properties.Resources._1268183;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.ControlBox = false;
-            this.Controls.Add(this.MenuHolder);
             this.Controls.Add(this.MENU_ENDLESS);
             this.Controls.Add(this.MenuGameOver);
             this.Controls.Add(this.MenuPVP);
+            this.Controls.Add(this.MenuHolder);
             this.Controls.Add(this.BtnBackToMenu);
             this.Controls.Add(this.ScoresBox);
             this.Controls.Add(this.BoundaryBottom);

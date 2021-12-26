@@ -488,6 +488,90 @@ namespace VP_Project
                 this.Close();
             }
         }
+
+        private void BtnPVPStart_MouseHover(object sender, EventArgs e)
+        {
+            BtnPVPStart.BackColor = Color.Black;
+            BtnPVPStart.Text = "Start";
+            BtnPVPStart.ForeColor = Color.Silver;
+        }
+
+        private void BtnPVPStart_MouseLeave(object sender, EventArgs e)
+        {
+            BtnPVPStart.BackColor = Color.Silver;
+            BtnPVPStart.Text = "Start";
+            BtnPVPStart.ForeColor = Color.Black;
+        }
+
+        private void button6_MouseHover(object sender, EventArgs e)
+        {
+            button6.BackColor = Color.Black;
+            button6.Text = "Go Back";
+            button6.ForeColor = Color.Silver;
+        }
+
+        private void button6_MouseLeave(object sender, EventArgs e)
+        {
+            button6.BackColor = Color.Silver;
+            button6.Text = "Go Back";
+            button6.ForeColor = Color.Black;
+        }
+
+        private void button4_MouseHover(object sender, EventArgs e)
+        {
+            button4.BackColor = Color.Black;
+            button4.Text = "Return to Menu";
+            button4.ForeColor = Color.Silver;
+        }
+
+        private void button4_MouseLeave(object sender, EventArgs e)
+        {
+            button4.BackColor = Color.Silver;
+            button4.Text = "Return to Menu";
+            button4.ForeColor = Color.Black;
+        }
+
+        private void BtnStart_MouseHover(object sender, EventArgs e)
+        {
+            BtnStart.BackColor = Color.Black;
+            BtnStart.Text = "Start";
+            BtnStart.ForeColor = Color.Silver;
+        }
+
+        private void BtnStart_MouseLeave(object sender, EventArgs e)
+        {
+            BtnStart.BackColor = Color.Silver;
+            BtnStart.Text = "Start";
+            BtnStart.ForeColor = Color.Black;
+        }
+
+        private void BtnBack_MouseHover(object sender, EventArgs e)
+        {
+            BtnBack.BackColor = Color.Black;
+            BtnBack.Text = "Go Back";
+            BtnBack.ForeColor = Color.Silver;
+        }
+
+        private void BtnBack_MouseLeave(object sender, EventArgs e)
+        {
+            BtnBack.BackColor = Color.Silver;
+            BtnBack.Text = "Go Back";
+            BtnBack.ForeColor = Color.Black;
+        }
+
+        private void BtnBackToMenu_MouseHover(object sender, EventArgs e)
+        {
+            BtnBackToMenu.BackColor = Color.Black;
+            BtnBackToMenu.Text = "Exit";
+            BtnBackToMenu.ForeColor = Color.Silver;
+        }
+
+        private void BtnBackToMenu_MouseLeave(object sender, EventArgs e)
+        {
+            BtnBackToMenu.BackColor = Color.Silver;
+            BtnBackToMenu.Text = "Exit";
+            BtnBackToMenu.ForeColor = Color.Black;
+        }
     }
 
 }
