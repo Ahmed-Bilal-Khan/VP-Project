@@ -253,7 +253,7 @@ namespace VP_Project
         private void button2_MouseLeave(object sender, EventArgs e)
         {
             button2.BackColor = Color.Silver;
-            button2.Text = "Story Mode";
+            button2.Text = "Scores";
             button2.ForeColor = Color.Black;
 
         }
