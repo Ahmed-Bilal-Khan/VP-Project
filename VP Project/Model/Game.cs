@@ -272,8 +272,8 @@ namespace VP_Project.Model.Game
                 MoveBullet();
                 player.CheckCollision();
                 MoveEnemy();
-                healthLabel.Text = $"Health: {player.PlayerHealth}";
-                timeLabel.Text = ($"Time: {countdown}");
+                healthLabel.Text = $"HEALTH: {player.PlayerHealth}";
+                timeLabel.Text = ($"TIME: {countdown}");
             }
             if (player.IsWasted())
             {
@@ -456,7 +456,7 @@ namespace VP_Project.Model.Game
         private void SetHealthLabels()
         {
             scoreLabel = new Label();
-            scoreLabel.Text = ($"Health: {player.PlayerHealth}");
+            scoreLabel.Text = ($"HEALTH: {player.PlayerHealth}");
             scoreLabel.Parent = parent;
             scoreLabel.Location = new System.Drawing.Point(4, 17);
             scoreLabel.Size = new System.Drawing.Size(150, 24);
@@ -466,7 +466,7 @@ namespace VP_Project.Model.Game
             scoreLabel.BackColor = System.Drawing.Color.Transparent;
 
             healthLabel = new Label();
-            healthLabel.Text = ($"Health: {player2.PlayerHealth}");
+            healthLabel.Text = ($"HEALTH: {player2.PlayerHealth}");
             healthLabel.Parent = parent;
             healthLabel.Location = new System.Drawing.Point(4, 500);
             healthLabel.Size = new System.Drawing.Size(150, 24);
@@ -483,8 +483,8 @@ namespace VP_Project.Model.Game
                 MoveBullet();
                 player.CheckPvPCollision();
                 player2.CheckPvPCollision();
-                healthLabel.Text = ($"Health: {player.PlayerHealth}");
-                scoreLabel.Text = ($"Health: {player2.PlayerHealth}");
+                healthLabel.Text = ($"HEALTH: {player.PlayerHealth}");
+                scoreLabel.Text = ($"HEALTH: {player2.PlayerHealth}");
                 CheckPvPWin();
             }
             
