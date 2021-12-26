@@ -377,10 +377,6 @@ namespace VP_Project.Model.Game
 
         private void DestroyGame()
         {
-            System.IO.Stream pew_pew = Properties.Resources.oh_no;
-            soundPlayer = new System.Media.SoundPlayer(pew_pew);
-            soundPlayer.Play();
-
             Menu.state = GAME_STATE.GAME_END;
             player.DestroySelf();
             if(player2 != null)

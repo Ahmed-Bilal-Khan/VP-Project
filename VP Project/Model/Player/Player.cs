@@ -203,7 +203,7 @@ namespace VP_Project.Model.Player
         }
         public virtual void DestroySelf()
         {
-            foreach(Bullet.Bullet bullet in bullets)
+            foreach (Bullet.Bullet bullet in bullets)
             {
                 bullet.Dispose();
             }

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using VP_Project.Model.Game;
 using Microsoft.Data.Sqlite;
+using System.Media;
 
 namespace VP_Project
 {
@@ -14,11 +15,15 @@ namespace VP_Project
         public static GAME_STATE state;
         public static int count = 0;
         public static int countp2 = 0;
+
+        static bool gameOverPlaying;
+
         public Menu()
         {
             InitializeComponent();
             state = GAME_STATE.GAME_WAIT;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            gameOverPlaying = false;
         }
 
         private void InitGame(GAME_TYPE gameType)
@@ -33,13 +38,14 @@ namespace VP_Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // TODO ... Well do something else here
+            gameOverPlaying = false;
             MENU_ENDLESS.Visible = true;
             MenuHolder.Visible = false;
             BtnBackToMenu.Visible = false;
         }
         private void button2_Click(object sender, EventArgs e)
         {
+            MenuHolder.Visible = false;
             BtnBackToMenu.Visible = true;
             BtnBackToMenu.Text = "Back";
             // Show SCORES
@@ -61,9 +67,9 @@ namespace VP_Project
         private void button3_Click(object sender, EventArgs e)
         {
             BtnBackToMenu.Visible = false;
-            // TODO ... Well do something else here
             MenuPVP.Visible = true;
             MenuHolder.Visible = false;
+            gameOverPlaying = false;
         }
 
         private void Update_Tick(object sender, EventArgs e)
@@ -94,12 +100,26 @@ namespace VP_Project
                     textBox1.Visible = false;
                     GameOverText.Text = "Player 2 Wins";
                 }
+                if (!gameOverPlaying)
+                {
+                    gameOverPlaying = true;
+                    System.IO.Stream oh_no = Properties.Resources.oh_no;
+                    SoundPlayer soundPlayer = new System.Media.SoundPlayer(oh_no);
+                    soundPlayer.Play();
+                }
             }
             if(state == GAME_STATE.GAME_END && Game.Type == GAME_TYPE.ENDLESS)
             {
                 MenuGameOver.Visible = true;
                 textBox1.Visible = true;
                 GameOverText.Text = "GAME OVER";
+                if(!gameOverPlaying)
+                {
+                    gameOverPlaying = true;
+                    System.IO.Stream oh_no = Properties.Resources.oh_no;
+                    SoundPlayer soundPlayer = new System.Media.SoundPlayer(oh_no);
+                    soundPlayer.Play();
+                }
             }
         }
 
@@ -459,6 +479,7 @@ namespace VP_Project
         {
             if(ScoresBox.Visible)
             {
+                MenuHolder.Visible = true;
                 ScoresBox.Visible = false;
                 BtnBackToMenu.Text = "Exit";
             }
