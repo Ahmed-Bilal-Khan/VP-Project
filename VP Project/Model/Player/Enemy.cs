@@ -7,7 +7,6 @@ namespace VP_Project.Model.Player
     internal class Enemy : Player
     {
         ENEMY_TYPE enemyType;
-
         public Enemy(Control parent, ENEMY_TYPE enemyType, int spawnX, int spawnY)
         {
             SPEED = 8;
@@ -18,6 +17,7 @@ namespace VP_Project.Model.Player
             base.spawnY = spawnY;
             SetPlayerSprite();
         }
+
 
         public override void CheckCollision()
         {
@@ -30,14 +30,15 @@ namespace VP_Project.Model.Player
                         DestroySelf();
                     }
                 }
-                //if(control.Name == "Player")
+                //if (control.Name == "Player")
                 //{
-                //    if(playerSprite != null)
-                //    if(playerSprite.Bounds.IntersectsWith(control.Bounds))
-                //    {
-                //        control.Dispose();
-                //        DestroySelf();
-                //    }
+                //    if (!playerSprite.IsDisposed && !playerSprite.IsDisposed)
+                //        if (playerSprite.Bounds.IntersectsWith(control.Bounds))
+                //        {
+                //            hitPlayer = true;
+                //            //control.Dispose();
+                //            DestroySelf();
+                //        }
                 //}
             }
         }
@@ -46,12 +47,11 @@ namespace VP_Project.Model.Player
         {
             //playerSprite.Location = new System.Drawing.Point(playerSprite.Location.X, 580);
             playerSprite.Dispose();
-            playerSprite = null;
-            GC.Collect();
+            //GC.Collect();
         }
         public override bool IsWasted()
         {
-            return (playerSprite == null || playerSprite.IsDisposed);
+            return playerSprite.IsDisposed;
         }
 
         public override void Shoot()

@@ -60,6 +60,8 @@ namespace VP_Project
             this.P1Select = new System.Windows.Forms.PictureBox();
             this.button6 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.ScoresBox = new System.Windows.Forms.ListBox();
+            this.BtnBackToMenu = new System.Windows.Forms.Button();
             this.MenuHolder.SuspendLayout();
             this.MENU_ENDLESS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -114,8 +116,9 @@ namespace VP_Project
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(170, 80);
             this.button2.TabIndex = 2;
-            this.button2.Text = "Story Mode";
+            this.button2.Text = "SCORES";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             this.button2.MouseLeave += new System.EventHandler(this.button2_MouseLeave);
             this.button2.MouseHover += new System.EventHandler(this.button2_MouseHover);
             // 
@@ -430,6 +433,29 @@ namespace VP_Project
             this.label4.TabIndex = 0;
             this.label4.Text = "PvP MODE";
             // 
+            // ScoresBox
+            // 
+            this.ScoresBox.BackColor = System.Drawing.SystemColors.WindowText;
+            this.ScoresBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ScoresBox.ForeColor = System.Drawing.Color.Cornsilk;
+            this.ScoresBox.FormattingEnabled = true;
+            this.ScoresBox.ItemHeight = 21;
+            this.ScoresBox.Location = new System.Drawing.Point(100, 23);
+            this.ScoresBox.Name = "ScoresBox";
+            this.ScoresBox.Size = new System.Drawing.Size(591, 487);
+            this.ScoresBox.TabIndex = 11;
+            this.ScoresBox.Visible = false;
+            // 
+            // BtnBackToMenu
+            // 
+            this.BtnBackToMenu.Location = new System.Drawing.Point(697, 504);
+            this.BtnBackToMenu.Name = "BtnBackToMenu";
+            this.BtnBackToMenu.Size = new System.Drawing.Size(75, 44);
+            this.BtnBackToMenu.TabIndex = 12;
+            this.BtnBackToMenu.Text = "Exit";
+            this.BtnBackToMenu.UseVisualStyleBackColor = true;
+            this.BtnBackToMenu.Click += new System.EventHandler(this.BtnBackToMenu_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -438,6 +464,8 @@ namespace VP_Project
             this.BackgroundImage = global::VP_Project.Properties.Resources._1268183;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.ControlBox = false;
+            this.Controls.Add(this.BtnBackToMenu);
+            this.Controls.Add(this.ScoresBox);
             this.Controls.Add(this.MenuPVP);
             this.Controls.Add(this.MenuGameOver);
             this.Controls.Add(this.MENU_ENDLESS);
@@ -504,6 +532,8 @@ namespace VP_Project
         private System.Windows.Forms.PictureBox P1Select;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListBox ScoresBox;
+        private System.Windows.Forms.Button BtnBackToMenu;
     }
 }
 

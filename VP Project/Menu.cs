@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 using VP_Project.Model.Game;
+using Microsoft.Data.Sqlite;
 
 namespace VP_Project
 {
@@ -16,7 +18,7 @@ namespace VP_Project
         {
             InitializeComponent();
             state = GAME_STATE.GAME_WAIT;
-            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
 
         private void InitGame(GAME_TYPE gameType)
@@ -34,10 +36,31 @@ namespace VP_Project
             // TODO ... Well do something else here
             MENU_ENDLESS.Visible = true;
             MenuHolder.Visible = false;
+            BtnBackToMenu.Visible = false;
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            BtnBackToMenu.Visible = true;
+            BtnBackToMenu.Text = "Back";
+            // Show SCORES
+            SqliteConnection connection = new SqliteConnection("Data Source=records.db");
+            connection.Open();
+
+            var command = connection.CreateCommand();
+            command.CommandText = @"SELECT * FROM Endless";
+
+            SqliteDataReader dr = command.ExecuteReader();
+            while (dr.Read())
+            {
+                ScoresBox.Items.Add($"Name: {dr.GetString(1)}  |  Score: {dr.GetInt32(2)}  |  Time: {dr.GetInt32(3)}");
+            }
+            ScoresBox.Visible = true;
+            connection.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            BtnBackToMenu.Visible = false;
             // TODO ... Well do something else here
             MenuPVP.Visible = true;
             MenuHolder.Visible = false;
@@ -234,6 +257,7 @@ namespace VP_Project
         {
             MenuHolder.Visible = true;
             MENU_ENDLESS.Visible = false;
+            BtnBackToMenu.Visible = true;
         }
 
         private void BtnStart_Click(object sender, EventArgs e)
@@ -249,15 +273,33 @@ namespace VP_Project
             MenuGameOver.Visible = false;
             MenuHolder.Visible = true;
             state = GAME_STATE.GAME_WAIT;
+
+            SaveEndless();
+
             game.Dispose();
             game = null;
             GC.Collect();
+            BtnBackToMenu.Visible = true;
         }
+        private void SaveEndless()
+        {
+            SqliteConnection connection = new SqliteConnection("Data Source=records.db");
+            connection.Open();
 
+            var command = connection.CreateCommand();
+            command.CommandText = @"INSERT INTO Endless(player_name, player_score, player_time) VALUES($PName, $PScore, $PTime)";
+            command.Parameters.AddWithValue("$PName", textBox1.Text);
+            command.Parameters.AddWithValue("$PScore", Game.SCORE1);
+            command.Parameters.AddWithValue("$PTime", Game.Countdown);
+
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
         private void button6_Click(object sender, EventArgs e)
         {
             MenuHolder.Visible = true;
             MenuPVP.Visible = false;
+            BtnBackToMenu.Visible = true;
         }
 
         private void BtnPVPStart_Click(object sender, EventArgs e)
@@ -394,6 +436,19 @@ namespace VP_Project
                 case 3:
                     PlaneSelectBox.BackgroundImage = Properties.Resources.plane_yellow;
                     break;
+            }
+        }
+
+        private void BtnBackToMenu_Click(object sender, EventArgs e)
+        {
+            if(ScoresBox.Visible)
+            {
+                ScoresBox.Visible = false;
+                BtnBackToMenu.Text = "Exit";
+            }
+            else
+            {
+                this.Close();
             }
         }
     }

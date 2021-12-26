@@ -35,16 +35,15 @@ namespace VP_Project.Model.Player
                     case SHOOTING_MODE.DOUBLE:
                         ShootDouble();
                         break;
+                    case SHOOTING_MODE.TRIPLE:
+                        ShootTriple();
+                        break;
                 }
             }
 
         }
         public void ShootSingle()
         {
-            if (ShootsLaser)
-            {
-                bulletType = Bullet.BULLET_TYPE.LASER;
-            }
             Bullet.Bullet bullet = new Model.Bullet.BulletBasic(
                 parent: parent,
                 type: bulletType,
@@ -63,10 +62,6 @@ namespace VP_Project.Model.Player
 
         public virtual void ShootDouble()
         {
-            if (ShootsLaser)
-            {
-                bulletType = Bullet.BULLET_TYPE.LASER;
-            }
             Bullet.Bullet bullet = new Model.Bullet.BulletBasic(
                 parent: parent,
                 type: bulletType,
@@ -90,6 +85,36 @@ namespace VP_Project.Model.Player
             bullets.Add(bullet);
             bullets.Add(bullet2);
         }
+
+        public virtual void ShootTriple()
+        {
+            Bullet.Bullet bullet = new Model.Bullet.BulletBasic(
+                parent: parent,
+                type: bulletType,
+                spawnX: playerSprite.Location.X + 10,
+                spawnY: playerSprite.Location.Y - 10);
+            Bullet.Bullet bullet2 = new Model.Bullet.BulletBasic(
+                parent: parent,
+                type: bulletType,
+                spawnX: playerSprite.Location.X - 20,
+                spawnY: playerSprite.Location.Y);
+            Bullet.Bullet bullet3 = new Model.Bullet.BulletBasic(
+                parent: parent,
+                type: bulletType,
+                spawnX: playerSprite.Location.X + 35,
+                spawnY: playerSprite.Location.Y);
+            if (playerSprite.Name == "Player_2")
+            {
+                bullet.SetName("Player_2_Bullet");
+            }
+            if (playerSprite.Name == "Player_1")
+            {
+                bullet.SetName("Player_1_Bullet");
+            }
+            bullets.Add(bullet);
+            bullets.Add(bullet2);
+            bullets.Add(bullet3);
+        }
         protected virtual void SetPlayerSprite()
         {
             playerSprite.Size = new System.Drawing.Size(32, 32);
@@ -110,13 +135,13 @@ namespace VP_Project.Model.Player
                 {
                     if (control.Name == "ENEMY_1" || control.Name == "ENEMY_2")
                     {
-                        if (control.Bounds.IntersectsWith(playerSprite.Bounds))
+                        if (playerSprite.Bounds.IntersectsWith(control.Bounds))
                         {
                             control.Dispose();
                             playerHealth -= 50;
                         }
                     }
-                    if(control.Name == "Laser")
+                    if (control.Name == "Laser")
                     {
                         if(control.Bounds.IntersectsWith(playerSprite.Bounds))
                         {
@@ -166,6 +191,10 @@ namespace VP_Project.Model.Player
         }
         public virtual void DestroySelf()
         {
+            foreach(Bullet.Bullet bullet in bullets)
+            {
+                bullet.Dispose();
+            }
             playerSprite.Dispose();
             playerDead = true;
             GC.Collect();

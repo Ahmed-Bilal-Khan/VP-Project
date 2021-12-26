@@ -1,9 +1,10 @@
 ﻿using System.Windows.Forms;
+using System;
 
 namespace VP_Project.Model.Bullet
 {
     enum BULLET_TYPE { RED, YELLOW, BLUE, GREEN, LASER };
-    internal abstract class Bullet
+    internal abstract class Bullet : IDisposable
     {
         protected PictureBox bulletSprite;
         protected Control parent;
@@ -29,6 +30,11 @@ namespace VP_Project.Model.Bullet
                 bulletSprite.Image.RotateFlip(System.Drawing.RotateFlipType.RotateNoneFlipY);
                 SPEED = -SPEED;
             }
+        }
+
+        public void Dispose()
+        {
+            bulletSprite.Dispose();
         }
     }
 }

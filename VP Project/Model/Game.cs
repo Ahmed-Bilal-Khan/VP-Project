@@ -15,13 +15,13 @@ namespace VP_Project.Model.Game
         public static Timer timer;
         List<Player.Enemy> enemies;
         static int countdown;
-        static int appearTime;
-        static int appearDelay;
+        static int appearCount;
         static int timeSinceAppearance;
         static int SCORE;
         PictureBox laserBox;
         Label scoreLabel;
         Label healthLabel;
+        Label timeLabel;
         // Input Checks
         private Boolean rightPressed;
         private Boolean leftPressed;
@@ -42,9 +42,7 @@ namespace VP_Project.Model.Game
         public Game(GAME_TYPE type, Control parent)
         {
             countdown = 0;
-            appearTime = 0;
             SCORE = 0;
-            appearDelay = r.Next(8, 13);
             Game.type = type;
             this.parent = parent;
             
@@ -71,6 +69,8 @@ namespace VP_Project.Model.Game
         public bool P2_upPressed { get => p2_upPressed; set => p2_upPressed = value; }
         public bool P2_downPressed { get => p2_downPressed; set => p2_downPressed = value; }
         public bool P2_shootPressed { get => p2_shootPressed; set => p2_shootPressed = value; }
+        public static int Countdown { get => countdown; }
+        public static int SCORE1 { get => SCORE; }
 
         public void CheckInput()
         {
@@ -126,21 +126,20 @@ namespace VP_Project.Model.Game
         {
             for(int i = 0; i < player.Bullets.Count; i++)
             {
-                if(!player.Bullets[i].IsWasted())
-                {
-                    player.Bullets[i].MoveBullet();
-                    player.Bullets[i].CheckCollision();
-
-                }
-                else if (player.Bullets[i].IsWasted() && player.Bullets[i].ShotEnemy)
+                if(player.Bullets[i].IsWasted() && player.Bullets[i].ShotEnemy)
                 {
                     player.Bullets.RemoveAt(i);
                     SCORE++;
                     scoreLabel.Text = $"SCORE: {SCORE}";
                 }
-                else
+                else if (player.Bullets[i].IsWasted())
                 {
                     player.Bullets.RemoveAt(i);
+                }
+                else
+                {
+                    player.Bullets[i].MoveBullet();
+                    player.Bullets[i].CheckCollision();
                 }
             }
 
@@ -174,8 +173,11 @@ namespace VP_Project.Model.Game
                 if (enemies[i].IsWasted())
                 {
                     enemies.RemoveAt(i);
-                    
                 }
+                //else if (enemies[i].IsWasted())
+                //{
+                //    enemies.RemoveAt(i);
+                //}
                 else
                 {
                     enemies[i].MoveBackward();
@@ -211,7 +213,7 @@ namespace VP_Project.Model.Game
                 enemies = new List<Player.Enemy>();
 
                 timer = new Timer();
-                timer.Interval = 2000;
+                timer.Interval = 1000;
                 timer.Tick += new EventHandler(SpawnEnemy);
                 timer.Enabled = true;
                 timer.Start();
@@ -236,12 +238,22 @@ namespace VP_Project.Model.Game
             healthLabel = new Label();
             healthLabel.Text = ($"Health: {player.PlayerHealth}");
             healthLabel.Parent = parent;
-            healthLabel.Location = new System.Drawing.Point(650, 17);
+            healthLabel.Location = new System.Drawing.Point(4, 500);
             healthLabel.Size = new System.Drawing.Size(150, 24);
             healthLabel.ForeColor = System.Drawing.Color.Silver;
             healthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16);
             healthLabel.Show();
             healthLabel.BackColor = System.Drawing.Color.Transparent;
+
+            timeLabel = new Label();
+            timeLabel.Text = ($"Time: {countdown}");
+            timeLabel.Parent = parent;
+            timeLabel.Location = new System.Drawing.Point(650, 17);
+            timeLabel.Size = new System.Drawing.Size(150, 24);
+            timeLabel.ForeColor = System.Drawing.Color.Silver;
+            timeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16);
+            timeLabel.Show();
+            timeLabel.BackColor = System.Drawing.Color.Transparent;
         }
         public void Update()
         {
@@ -249,42 +261,42 @@ namespace VP_Project.Model.Game
             {
                 CheckInput();
                 MoveBullet();
+                player.CheckCollision();
                 MoveEnemy();
                 healthLabel.Text = $"Health: {player.PlayerHealth}";
+                timeLabel.Text = ($"Time: {countdown}");
             }
-            if(player == null)
+            if (player.IsWasted())
             {
                 timer.Stop();
                 timer.Enabled = false;
-                timer = new Timer();
+                // timer = new Timer();
+                DestroyGame();
             }
-            
+
         }
         private void SpawnEnemy(object sender, EventArgs e)
         {
-            countdown++;
-            //appearTime++;
+            countdown ++; // since tick interval is 2 sec
             
             if(player != null)
             {
                 AddEnemy();
-                player.CheckCollision();
-                if (player.IsWasted())
-                {
-                    Menu.state = GAME_STATE.GAME_END;
-                    DestroyGame();
-                }
-
-                //if(appearTime == appearDelay)
-                if(SCORE == 30)
+                if(SCORE == 3 && appearCount == 0)
                 {
                     SpawnLaser();
-                    //appearDelay = r.Next(8, 13);
-                    //appearTime = 0;
-                    timeSinceAppearance = 8;
+                    timeSinceAppearance = 9;
                     pickupExists = true;
+                    appearCount++;
                 }
-                if(timeSinceAppearance % 7 == 0 && pickupExists)
+                if(SCORE == 5 && appearCount == 1)
+                {
+                    SpawnLaser();
+                    timeSinceAppearance = 9;
+                    pickupExists = true;
+                    appearCount++;
+                }
+                if(timeSinceAppearance % 8 == 0 && pickupExists)
                 {
                     laserBox.Dispose();
                     pickupExists = false;
@@ -329,10 +341,14 @@ namespace VP_Project.Model.Game
         }
         private void AddEnemy ()
         {
-            int spawnY = 3;
-            int spawnX = r.Next(10, 790);
-            Player.Enemy enemy = new Player.Enemy(parent, (Player.ENEMY_TYPE)r.Next(0, 2), spawnX, spawnY);
-            enemies.Add(enemy);
+            if(enemies.Count < 13)
+            {
+                int spawnY = 3;
+                int spawnX = r.Next(40, 750);
+                Player.Enemy enemy = new Player.Enemy(parent, (Player.ENEMY_TYPE)r.Next(0, 2), spawnX, spawnY);
+                enemies.Add(enemy);
+            }
+            
         }
         private void SpawnLaser()
         {
@@ -352,6 +368,7 @@ namespace VP_Project.Model.Game
 
         private void DestroyGame()
         {
+            Menu.state = GAME_STATE.GAME_END;
             player.DestroySelf();
             player = null;
             foreach(Player.Enemy enemy in enemies)
@@ -369,6 +386,7 @@ namespace VP_Project.Model.Game
             enemies.Clear();
             if(laserBox != null)
                 laserBox.Dispose();
+            timeLabel.Dispose();
             healthLabel.Dispose();
         }
 
@@ -381,7 +399,7 @@ namespace VP_Project.Model.Game
             }
             else if (Menu.state == GAME_STATE.GAME_START)
             {
-                switch (Menu.count)
+                switch (Menu.countp2)
                 {
                     case 0:
                         player = new Player.Player_Red(this.parent, 400, 500);
@@ -396,7 +414,7 @@ namespace VP_Project.Model.Game
                         player = new Player.Player_Yellow(this.parent, 400, 500);
                         break;
                 }
-                switch (Menu.countp2)
+                switch (Menu.count)
                 {
                     case 0:
                         player2 = new Player.Player_Red(this.parent, 400, 100);
@@ -449,9 +467,9 @@ namespace VP_Project.Model.Game
                 player2.CheckPvPCollision();
                 healthLabel.Text = ($"Health: {player.PlayerHealth}");
                 scoreLabel.Text = ($"Health: {player2.PlayerHealth}");
-
+                
             }
-            if (player == null)
+            if (player.IsWasted())
             {
                 timer.Stop();
                 timer.Enabled = false;
