@@ -70,7 +70,7 @@ namespace VP_Project.Model.Bullet
         {
             foreach(Control control in parent.Controls)
             {
-                if (control.Name == "BoundaryTop")
+                if (control.Name == "BoundaryTop" || control.Name == "BoundaryBottom")
                 {
                     if (bulletSprite.Bounds.IntersectsWith(control.Bounds))
                     {
